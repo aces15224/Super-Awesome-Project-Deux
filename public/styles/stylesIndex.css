@@ -1,0 +1,56 @@
+
+html{
+  max-width: 1300px;
+}
+
+#headNav{
+  background-color:#1d1c1c;
+  height: 100px;
+}
+.navbar-toggler{
+  background-color:gray;
+}
+
+#header{
+  width:100%;
+  position: fixed;
+}
+
+#footer{
+  position: fixed;
+  bottom: 0;
+  width: 100%; 
+  background-color:black;
+  /* border-top: solid 8px #4aaaa5; */
+  margin-top: 10px;
+  text-align:center;
+}
+
+body{
+  background-image: url("../img/wood.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center; 
+  width: auto;
+  height: auto;
+}
+
+#buy, #sell{
+  margin:auto;
+  height:290px;
+}
+
+
+#buyAndSell{
+  margin: 0 auto;
+  position:relative;
+  top: 190px;
+}
+
+#title{
+  font-family: 'Pacifico', cursive;
+  color: hotpink;
+  padding:0px;
+  margin:0 auto;
+}
