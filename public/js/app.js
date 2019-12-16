@@ -16,13 +16,23 @@ $("#searchButton").on("click", function(event){
           else{
             return false;
           }
-        case "two":
-          var zipcode = $("#areaSelect").val().trim();
-          var radius = $("#zipRadius").val();
-          if(radius!="" && zipcode.length===5)
-            areaCode(zipcode, radius)
-            break;
 
+        case "two":
+          var zipCodeArray=[64116, 64106, 64124, 64105, 64123, 64115, 64117, 64120, 64121, 64127, 64101, 64108, 64102, 66101]
+          var zipcode = $("#areaSelect").val().trim();
+          var zipParse= parseInt(zipcode)
+          var radius = $("#zipRadius").val();
+
+          for(i=0; i<zipCodeArray.length; i++){
+            var zip=zipCodeArray[i];
+            if(radius!="" && zipcode.length===5 && zipParse===zip){
+              alert("yes")
+              areaCode(zipcode, radius)
+              break; 
+            }
+            return false;
+           }
+            
         case "three":
           var bed = $("#bedNum").val();
           if(bed >= 1){
@@ -31,7 +41,8 @@ $("#searchButton").on("click", function(event){
           }
           return false;
       }
-  }
+      
+}
 
 function priceMatch(min, max){
   console.log(min)
