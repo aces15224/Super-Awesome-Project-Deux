@@ -69,3 +69,50 @@ function areaCode(zipcodeParse, radius){
     }});  
 }}); 
 
+
+// Seller page//
+// Create Listing Form 
+
+
+$("#sellButton").on("click", function(event){
+  event.preventDefault();
+
+  var newListing = {
+    sellerName: $("#name").val(),
+    email: $("#email").val(),
+    sellingPrice: $("#price").val(),
+    sqFootage: $("#sqFoot").val(),
+    bedrooms: $("#bedrooms").val(),
+    areaZip: $("#areaZip").val()
+  };
+ 
+  $.post("/api/new", newListing)
+    .then(function(data) {
+    console.log(data);
+    });
+
+  $("#name").val("");
+  $("#email").val("");
+  $("#price").val("");
+  $("#sqFoot").val("");
+  $("#bedrooms").val("");
+  $("#areaZip").val("");
+});
+
+// $("#sellButton").on("click", function(event){
+//   event.preventDefault();
+//   var sellerName = $("#name").val();
+//   var email = $("#email").val();
+
+//   var price = $("#price").val();
+//   var priceParse = parseInt(price);
+
+//   var sqFoot = $("#sqfoot").val();
+//   var sqFootParse = parseInt(sqFoot);
+
+//   var bedrooms = $("#bedrooms").val();
+//   var roomParse = parseInt(bedrooms);
+
+//   var areaZip = $("#areaZip").val();
+//   var areaZipParse = parseInt(areaZip);
+// }
