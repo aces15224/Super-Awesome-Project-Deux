@@ -1,0 +1,45 @@
+<form>
+  <div class="form-group">
+    <label for="name">Seller Name</label>
+    <input type="text" class="form-control" id="name">
+  </div>
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" id="email" placeholder="name@example.com">
+  </div>
+  <div class="form-group">
+    <label for="price">Asking Price</label>
+    <input type="number" class="form-control" id="price">
+  </div>
+  <div class="form-group">
+    <label for="sqFoot">Square Footage</label>
+    <input type="number" class="form-control" id="sqFoot">
+  </div>  
+  <div class="form-group">
+    <label for="bedrooms">Bedrooms</label>
+    <select class="form-control" id="bedrooms">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5+</option>
+    </select>
+  </div>
+{{!-- change to zipcode --}}
+  <div class="form-group">
+    <label for="address">Listing address</label>
+    <input type="text" class="form-control" id="address">
+  </div>
+
+  {{!-- change checkbox value to reference SQL --}}
+  <div class="form-group">
+    <label for="hotAndCold">Includes Heating and Cooling</label>
+    <input type="checkbox" name="heating" value="1"> 
+  </div>
+
+  {{!-- include?  notes about condition? --}}
+  {{!-- <div class="form-group">
+    <label for="exampleFormControlTextarea1">Example textarea</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+</form> --}}
