@@ -83,7 +83,9 @@ $("#sellButton").on("click", function(event){
     sellingPrice: $("#price").val(),
     sqFootage: $("#sqFoot").val(),
     bedrooms: $("#bedrooms").val(),
-    areaZip: $("#areaZip").val()
+    areaZip: $("#areaZip").val(),
+    image: $("#image").val(),
+    hotAndCold:$("#hotAndCold")
   };
  
   $.post("/api/new", newListing)
@@ -97,6 +99,9 @@ $("#sellButton").on("click", function(event){
   $("#sqFoot").val("");
   $("#bedrooms").val("");
   $("#areaZip").val("");
+  $("#image").val("");
+  // CheckBox value may not work
+  $("#hotAndCold").val("")
 });
 
 // $("#sellButton").on("click", function(event){
