@@ -1,3 +1,4 @@
+// Buyer Page //
 // Search and Filter Functions//
 
 $("#searchButton").on("click", function(event){
@@ -9,8 +10,11 @@ $("#searchButton").on("click", function(event){
         case "one":
           var min = $("#minPrice").val();
           var max = $("#maxPrice").val();
-          if(min >= 0 && max >=1){
-            priceMatch(min,max)
+          var minParse = parseInt(min)
+          var maxParse = parseInt(max)
+
+          if(minParse >= 0 && maxParse >=1){
+            priceMatch(minParse,maxParse)
             break;
           }
           else{
@@ -27,7 +31,7 @@ $("#searchButton").on("click", function(event){
             var zip=zipCodeArray[i];
             if(radius!="" && zipcode.length===5 && zipParse===zip){
               alert("yes")
-              areaCode(zipcode, radius)
+              areaCode(zipParse, radius)
               break; 
             }
             return false;
@@ -35,26 +39,27 @@ $("#searchButton").on("click", function(event){
             
         case "three":
           var bed = $("#bedNum").val();
-          if(bed >= 1){
-            bedrooms(bed)
+          var bedParse=parseInt(bed)
+          if(bedParse >= 1){
+            bedrooms(bedParse)
             break; 
           }
           return false;
-      }
-      
+      }      
 }
 
-function priceMatch(min, max){
-  console.log(min)
-  console.log(max)
+function priceMatch(minParse,maxParse){
+  console.log(minParse)
+  console.log(maxParse)
 }
 
-function bedrooms(bed){
-  console.log(bed)
+function bedrooms(bedParse){
+  console.log(bedParse)
 }
 
-function areaCode(zipcode, radius){
-  var queryURL="https://api.zip-codes.com/ZipCodesAPI.svc/1.0/FindZipCodesInRadius?zipcode=" + zipcode + "&minimumradius=0&maximumradius=" + radius + "&key=OTXG2RB5WPBTU3O8BZEA";
+function areaCode(zipcodeParse, radius){
+  console.log(zipcodeParse)
+  var queryURL="https://api.zip-codes.com/ZipCodesAPI.svc/1.0/FindZipCodesInRadius?zipcode=" + zipcodeParse + "&minimumradius=0&maximumradius=" + radius + "&key=OTXG2RB5WPBTU3O8BZEA";
     $.ajax({
     url: queryURL,
     method: "GET"
@@ -64,4 +69,3 @@ function areaCode(zipcode, radius){
     }});  
 }}); 
 
- 
