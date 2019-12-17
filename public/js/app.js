@@ -42,6 +42,7 @@ $("#searchButton").on("click", function(event){
           var bedParse=parseInt(bed)
           if(bedParse >= 1){
             bedrooms(bedParse)
+            $("#bedNum").val("")
             break; 
           }
           return false;
@@ -85,7 +86,7 @@ $("#sellButton").on("click", function(event){
     bedrooms: $("#bedrooms").val(),
     areaZip: $("#areaZip").val(),
     image: $("#image").val(),
-    hotAndCold:$("#hotAndCold")
+    hotAndCold:$("#hotAndCold").val()
   };
  
   $.post("/api/new", newListing)
@@ -103,21 +104,3 @@ $("#sellButton").on("click", function(event){
   // CheckBox value may not work
   $("#hotAndCold").val("")
 });
-
-// $("#sellButton").on("click", function(event){
-//   event.preventDefault();
-//   var sellerName = $("#name").val();
-//   var email = $("#email").val();
-
-//   var price = $("#price").val();
-//   var priceParse = parseInt(price);
-
-//   var sqFoot = $("#sqfoot").val();
-//   var sqFootParse = parseInt(sqFoot);
-
-//   var bedrooms = $("#bedrooms").val();
-//   var roomParse = parseInt(bedrooms);
-
-//   var areaZip = $("#areaZip").val();
-//   var areaZipParse = parseInt(areaZip);
-// }
