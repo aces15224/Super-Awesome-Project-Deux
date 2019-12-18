@@ -1,3 +1,92 @@
+$(document).ready(function() {
+  getlistings()
+    // Container for Displaying Listings
+  var listingsContainer = $(".showcase");
+  // Variable to hold our listings
+  var listings;
+// This function grabs listings from the database and updates the view
+  function getlistings() {
+      $.get("/listings" , function(data) {
+      console.log("listings", data);
+      listings = data;
+      if (!listings || !listings.length) {
+        displayEmpty();
+      }
+      else {
+        initializeRows();
+      }
+    });
+  }
+
+  // InitializeRows handles appending all of our constructed post HTML inside listingsContainer
+  function initializeRows() {
+    listingsContainer.empty();
+    var listingsToAdd = [];
+    for (var i = 0; i < listings.length; i++) {
+      listingsToAdd.push(createNewRow(listings[i]));
+    }
+    listingsContainer.append(listingsToAdd);
+  }
+
+  // This function constructs a post's HTML
+  function createNewRow(listings) {
+    // var formattedDate = new Date(listings.createdAt);
+    // formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
+    var newlistingsCard = $("<div>");
+    newlistingsCard.addClass("card");
+    var newlistingsCardHeading = $("<div>");
+    newlistingsCardHeading.addClass("card-header");
+    var deleteBtn = $("<button>");
+    deleteBtn.text("x");
+    deleteBtn.addClass("delete btn btn-danger");
+    var editBtn = $("<button>");
+    editBtn.text("EDIT");
+    editBtn.addClass("edit btn btn-info");
+    var newlistingsTitle = $("<h2>");
+    // var newlistingsDate = $("<small>");
+    var newlistingsAuthor = $("<h5>");
+    // edit
+    newlistingsAuthor.text("Written by: " + listings.sellerName);
+    // edit
+    newlistingsAuthor.css({
+      float: "right",
+      color: "blue",
+      "margin-top":
+      "-10px"
+    });
+    var newlistingsCardBody = $("<div>");
+    newlistingsCardBody.addClass("card-body");
+    var newlistingsBody = $("<p>");
+    // edit
+    newlistingsTitle.text(listings.email + " ");
+    newlistingsBody.text(listings.sellingPrice);
+    // edit
+    // newlistingsDate.text(formattedDate);
+    // newlistingsTitle.append(newlistingsDate);
+    newlistingsCardHeading.append(deleteBtn);
+    newlistingsCardHeading.append(editBtn);
+    newlistingsCardHeading.append(newlistingsTitle);
+    newlistingsCardHeading.append(newlistingsAuthor);
+    newlistingsCardBody.append(newlistingsBody);
+    newlistingsCard.append(newlistingsCardHeading);
+    newlistingsCard.append(newlistingsCardBody);
+    newlistingsCard.data("listings", listings);
+    return newlistingsCard;
+  }
+function displayEmpty(){
+  console.log("nothing!")
+}
+
+
+
+})
+
+
+
+
+
+
+
 // Buyer Page //
 // Search and Filter Functions//
 
@@ -89,7 +178,7 @@ $("#sellButton").on("click", function(event){
     hotAndCold:$("#hotAndCold").val()
   };
  
-  $.post("/api/new", newListing)
+  $.post("/listings", newListing)
     .then(function(data) {
     console.log(data);
     });
