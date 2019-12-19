@@ -28,19 +28,104 @@
 </div>
 </div>
 
+<!-- SIGN UP MODAL -->
+  <div id="modal-signup" class="modal">
+    <div class="modal-content">
+      <h4>Sign up</h4><br />
+      <form id="signup-form">
+        <div class="input-field">
+          <input type="email" id="signup-email" required />
+          <label for="signup-email">Email address</label>
+        </div>
+        <div class="input-field">
+          <input type="password" id="signup-password" required />
+          <label for="signup-password">Choose password</label>
+        </div>
+        <button class="btn yellow darken-2 z-depth-0">Sign up</button>
+      </form>
+    </div>
+  </div>
+  <!-- LOGIN MODAL -->
+  <div id="modal-login" class="modal">
+    <div class="modal-content">
+      <h4>Login</h4><br />
+      <form id="login-form">
+        <div class="input-field">
+          <input type="email" id="login-email" required />
+          <label for="login-email">Email address</label>
+        </div>
+        <div class="input-field">
+          <input type="password" id="login-password" required />
+          <label for="login-password">Your password</label>
+        </div>
+        <button class="btn yellow darken-2 z-depth-0">Login</button>
+      </form>
+    </div>
+  </div>
+  <!-- ACCOUNT MODAL -->
+  <div id="modal-account" class="modal">
+    <div class="modal-content center-align">
+      <h4>Account details</h4><br />
+      <div class="account-details"></div>
+    </div>
+  </div>
+
   {{{body}}}
 
 <div id="footer">Hello</div>
-{{!-- <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="/__/firebase/7.6.0/firebase-app.js"></script>
-<!-- TODO: Add SDKs for Firebase products that you want to use
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-firestore.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="/__/firebase/7.6.0/firebase-analytics.js"></script>
-<!-- Initialize Firebase -->
-<script src="/__/firebase/init.js"></script> --}}
+  <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-analytics.js"></script>
+
+  <script>
+
+    import * as admin from 'firebase-admin';
+
+    admin.initializeApp(
+      credential: admin.credential.applicationDefault(),
+      databaseURL: "https://project-2-super-awesome.firebaseio.com"
+    );
+
+    export default admin
+    import * as admin from 'firebase-admin';
+    import 'firebase/auth'
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyCZi3hYSq6X4oe7iyXUwwQFC-TyPnHptJw",
+      authDomain: "project-2-super-awesome.firebaseapp.com",
+      databaseURL: "https://project-2-super-awesome.firebaseio.com",
+      projectId: "project-2-super-awesome",
+      storageBucket: "project-2-super-awesome.appspot.com",
+      messagingSenderId: "272659106499",
+      appId: "1:272659106499:web:2f1567247609fd67b6f076",
+      measurementId: "G-VG9DZM1RZL"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+    export const auth = firebase.auth
+
+    export default firebase;
+  </script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="../../auth.js"></script>
+  <script src="../../public/js/index.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="/js/app.js"></script>
 </body>
 </html>
