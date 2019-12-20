@@ -36,17 +36,26 @@ $(document).ready(function() {
     newlistingsCard.addClass("card");
     var newlistingsCardHeading = $("<div>");
     newlistingsCardHeading.addClass("card-header");
-    var deleteBtn = $("<button>");
-    deleteBtn.text("x");
-    deleteBtn.addClass("delete btn btn-danger");
-    var editBtn = $("<button>");
-    editBtn.text("EDIT");
-    editBtn.addClass("edit btn btn-info");
+    // var deleteBtn = $("<button>");
+    // deleteBtn.text("x");
+    // deleteBtn.addClass("delete btn btn-danger");
+    // var editBtn = $("<button>");
+    // editBtn.text("EDIT");
+    // editBtn.addClass("edit btn btn-info");
     var newlistingsTitle = $("<h2>");
+
+    //image//----------------------------------------------------
+    var listingImage= $("<img>");
+    listingImage.attr('src', listings.image)
+    listingImage.css({
+      float: "left"
+    })
+//image//--------------------------------------------------------
+
     // var newlistingsDate = $("<small>");
     var newlistingsAuthor = $("<h5>");
     // edit
-    newlistingsAuthor.text("Written by: " + listings.sellerName);
+    newlistingsAuthor.text("Created by: " + listings.sellerName);
     // edit
     newlistingsAuthor.css({
       float: "right",
@@ -56,18 +65,44 @@ $(document).ready(function() {
     });
     var newlistingsCardBody = $("<div>");
     newlistingsCardBody.addClass("card-body");
+
+
+    //results list//
+    var resultList=$("<ul>");
+    var listItem=$("<li>");
+    var dataBed=$("<h5>");
+    var dataEmail=$("<h5>");
+    var dataSqFt=$("<h5>");
+    dataSqFt.text("Area: "+ listings.sqFootage + " sq. ft.");
+    dataBed.text("Bedrooms: "+ listings.bedrooms);
+    dataEmail.text("Contact email: " + listings.email);
+    listItem.append(dataSqFt);
+    listItem.append(dataBed);
+    listItem.append(dataEmail);
+    resultList.append(listItem);
+    newlistingsCardBody.append(resultList);
+//results list//
+
+
     var newlistingsBody = $("<p>");
+    newlistingsBody.css({
+      float: "right"
+    })
     // edit
-    newlistingsTitle.text(listings.email + " ");
-    newlistingsBody.text(listings.sellingPrice);
+    newlistingsBody.text("Contact email: " + listings.email);
+    newlistingsTitle.text("Asking price: $" + listings.sellingPrice);
     // edit
     // newlistingsDate.text(formattedDate);
     // newlistingsTitle.append(newlistingsDate);
-    newlistingsCardHeading.append(deleteBtn);
-    newlistingsCardHeading.append(editBtn);
+    // newlistingsCardHeading.append(deleteBtn);
+    // newlistingsCardHeading.append(editBtn);
+    newlistingsCardBody.append(newlistingsBody);
     newlistingsCardHeading.append(newlistingsTitle);
     newlistingsCardHeading.append(newlistingsAuthor);
-    newlistingsCardBody.append(newlistingsBody);
+    newlistingsCardHeading.append(newlistingsTitle);
+    //image//------------------------------------------------------------
+    newlistingsCardBody.append(listingImage);
+    //image//------------------------------------------------------------
     newlistingsCard.append(newlistingsCardHeading);
     newlistingsCard.append(newlistingsCardBody);
     newlistingsCard.data("listings", listings);
@@ -160,36 +195,36 @@ function areaCode(zipcodeParse, radius){
 }}); 
 
 
-// Seller page//
-// Create Listing Form 
+// // Seller page//
+// // Create Listing Form 
 
 
-$("#sellButton").on("click", function(event){
-  event.preventDefault();
+// $("#sellButton").on("click", function(event){
+//   event.preventDefault();
 
-  var newListing = {
-    sellerName: $("#name").val(),
-    email: $("#email").val(),
-    sellingPrice: $("#price").val(),
-    sqFootage: $("#sqFoot").val(),
-    bedrooms: $("#bedrooms").val(),
-    areaZip: $("#areaZip").val(),
-    image: $("#image").val(),
-    hotAndCold:$("#hotAndCold").val()
-  };
- 
-  $.post("/listings", newListing)
-    .then(function(data) {
-    console.log(data);
-    });
+//   var newListing = {
+//     sellerName: $("#name").val(),
+//     email: $("#email").val(),
+//     sellingPrice: $("#price").val(),
+//     sqFootage: $("#sqFoot").val(),
+//     bedrooms: $("#bedrooms").val(),
+//     areaZip: $("#areaZip").val(),
+//     image: $("#image").val(),
+//     hotAndCold:$("#hotAndCold").val()
+//   };
+//  console.log(hotAndCold)
+//   $.post("/listings", newListing)
+//     .then(function(data) {
+//     console.log(data);
+//     });
 
-  $("#name").val("");
-  $("#email").val("");
-  $("#price").val("");
-  $("#sqFoot").val("");
-  $("#bedrooms").val("");
-  $("#areaZip").val("");
-  $("#image").val("");
-  // CheckBox value may not work
-  $("#hotAndCold").val("")
-});
+//   $("#name").val("");
+//   $("#email").val("");
+//   $("#price").val("");
+//   $("#sqFoot").val("");
+//   $("#bedrooms").val("");
+//   $("#areaZip").val("");
+//   $("#image").val("");
+//   // CheckBox value may not work
+//   $("#hotAndCold").val("")
+// });
