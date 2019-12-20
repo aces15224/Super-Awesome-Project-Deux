@@ -24,7 +24,7 @@ else {
     port: 3306,
     user: "test",
     password: "password",
-    database: "listings_db"
+    database: "Listings_db"
   });
 }
 connection.connect(function (err) {
