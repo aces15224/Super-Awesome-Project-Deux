@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  // getlistings()
+  getlistings()
   
     // Container for Displaying Listings
   var listingsContainer = $(".showcase");
@@ -7,18 +7,18 @@ $(document).ready(function() {
   var listings;
 // This function grabs listings from the database and updates the view
 
-  // function getlistings() {
-  //     $.get("/listings" , function(data) {
-  //     console.log("listings", data);
-  //     listings = data;
-  //     if (!listings || !listings.length) {
-  //       displayEmpty();
-  //     }
-  //     else {
-  //       initializeRows();
-  //     }
-  //   });
-  // }
+  function getlistings() {
+      $.get("/listings" , function(data) {
+      console.log("listings", data);
+      listings = data;
+      if (!listings || !listings.length) {
+        displayEmpty();
+      }
+      else {
+        initializeRows();
+      }
+    });
+  }
 
 
 //filter listings//________________________________________________________________________>>>>>
