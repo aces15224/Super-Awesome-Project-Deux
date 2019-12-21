@@ -1,6 +1,7 @@
 
 html{
-  max-width: 1300px;
+  margin:0px;
+  /* max-width: 1300px; */
 }
 
 #headNav{
@@ -13,7 +14,6 @@ html{
 
 #header{
   width:100%;
-  position: fixed;
 }
 
 #footer{
@@ -21,13 +21,12 @@ html{
   bottom: 0;
   width: 100%; 
   background-color:black;
-  /* border-top: solid 8px #4aaaa5; */
   margin-top: 10px;
   text-align:center;
 }
 
 body{
-  background-image: url("../img/wood.png");
+  background-image: url("../img/wood1.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -53,3 +52,39 @@ body{
   padding:0px;
   margin:0 auto;
 }
+
+#sellButton{
+  background-color:red;
+}
+
+body{
+  height:10000px;
+}
+
+#searchPanel{
+  position:fixed;
+  border:5px solid blue;
+}
+#searchForm{
+  background-color:gray;
+  color: white;
+}
+
+img{
+  width:250px;
+  height: 200px;
+}
+
+#logo{
+  width:388px;
+  height: 87px;
+} 
+
+.card, .card-body{
+  width: 600px;
+}
+
+/* input[type=text]{
+  width: 5px;
+  background-color:red;
+} */
