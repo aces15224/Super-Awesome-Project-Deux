@@ -1,6 +1,22 @@
 var db = require("../models");
 
 module.exports = function(app) {
+
+// Buy Page Route
+
+app.get("/buy", function(req, res) {
+  res.render("buyer")
+})
+
+// Sell Page Route
+app.get("/sell", function(req, res) {
+  res.render("seller")
+})
+
+
+
+
+
   // Load index page
   app.get("/", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {

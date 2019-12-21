@@ -1,0 +1,90 @@
+
+html{
+  margin:0px;
+  /* max-width: 1300px; */
+}
+
+#headNav{
+  background-color:#1d1c1c;
+  height: 100px;
+}
+.navbar-toggler{
+  background-color:gray;
+}
+
+#header{
+  width:100%;
+}
+
+#footer{
+  position: fixed;
+  bottom: 0;
+  width: 100%; 
+  background-color:black;
+  margin-top: 10px;
+  text-align:center;
+}
+
+body{
+  background-image: url("../img/wood1.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center; 
+  width: auto;
+  height: auto;
+}
+
+#buy, #sell{
+  margin:auto;
+  height:290px;
+}
+
+
+#buyAndSell{
+  margin: 0 auto;
+  position:relative;
+  top: 190px;
+}
+
+#logo{
+  font-family: 'Pacifico', cursive;
+  padding:0px;
+  margin:0 auto;
+}
+
+#sellButton{
+  background-color:red;
+}
+
+body{
+  height:10000px;
+}
+
+#searchPanel{
+  position:fixed;
+  border:5px solid blue;
+}
+#searchForm{
+  background-color:gray;
+  color: white;
+}
+
+img{
+  width:250px;
+  height: 200px;
+}
+
+#logo{
+  width:388px;
+  height: 87px;
+} 
+
+.card, .card-body{
+  width: 600px;
+}
+
+/* input[type=text]{
+  width: 5px;
+  background-color:red;
+} */

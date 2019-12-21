@@ -1,0 +1,48 @@
+<div class="row">  
+  {{!-- search results displayed here --}}
+  <div class="col-lg-10 showcase"></div>
+  <div class="col-lg-2">
+    <panel id="searchPanel">
+        {{!-- filter controls --}}
+    <form id="searchForm">
+        {{!-- price match --}}
+      <div class="form-group">
+        <input value="one" type="radio" name="filter">
+        <label for="minPrice">Minimum Price</label>
+        <input type="text" class="form-control" id="minPrice" placeholder="Min">
+        <label for="maxPrice">Maximum Price</label>
+        <input type="text" class="form-control" id="maxPrice" placeholder="Max">
+    </div>
+        {{!-- zipcode match --}}
+    <div class="form-group">
+      <input value="two" type="radio" name="filter">
+      <label for="areaSelect">Zip Code</label>
+      <input type="text" class="form-control" id="areaSelect" placeholder="Zip Code">
+      <select class="form-control" id="zipRadius">
+        <option value=""></option>
+        <option value="5">5 miles</option>
+        <option value="10">10 miles</option>
+        <option value="15">15 miles</option>
+        <option value="20">20 miles</option>
+        <option value="25">25+</option>
+      </select>
+    </div>
+        {{!-- bedroom match --}}
+    <div class="form-group">
+      <input value="three" type="radio" name="filter">
+      <label for="bedNum">Select by Bedroom</label>
+      <select class="form-control" id="bedNum">
+        <option value=""></option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5+</option>
+      </select>
+    </div>
+      <button id="searchButton" type="button">Push</button>
+    </form>
+    </panel>
+</div>
+  
+</div>    
