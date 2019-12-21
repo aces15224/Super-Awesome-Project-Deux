@@ -1,5 +1,6 @@
 var db = require("../models");
-// var bedrooms = require("../public/js/app.js")
+var Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 module.exports = function(app) {
   // Get all Listings
@@ -9,6 +10,7 @@ module.exports = function(app) {
     });
   });
 
+// Get all listings with certain amount of bedrooms
   app.get("/listings/bedrooms/:bedrooms?", function(req, res) {
     db.Listings.findAll({
       where:{
@@ -19,22 +21,24 @@ module.exports = function(app) {
       });
     });
 
+// Get all listings within a certain price range
+  app.get("/listings/price:price?", function(req, res) {
 
-  // app.get("/listings/:price?", function(req, res) {
-  //   db.Listings.findAll({
-  //     where: {
-  //       sellingPrice:{
-  //         $between: [50000, 200000]
-  //       } 
-  //     }
-  //   }).then(function(dbListings) {
-  //     console.log(dbListings)
-  //     res.json(dbListings);
-  //   });
-  // });
+    console.log(req.query.max)
+    db.Listings.findAll({
+      where: {
+        sellingPrice:{
+          [Op.between]: [req.query.min, req.query.max]
+        } 
+      }
+    }).then(function(dbListings) {
+      console.log(dbListings)
+      res.json(dbListings);
+    });
+  });
 
 
-// get all zipcodes 
+// Get all Zipcodes within a certain range AND within the NKC area 
 
   // app.get("/listings/zipcode", function(req, res) {
   //   db.Listings.findAll({
