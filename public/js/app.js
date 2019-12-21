@@ -1,14 +1,28 @@
-$(document).ready(function() {
+$(document).ready(function () {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function (registrations) {
+      for (var registration of registrations) {
+        registration.unregister();
+        console.log("Unregistered Service Workers");
+      }
+    }).then(() => {
+      navigator.serviceWorker.register("/js/service-worker.js", { scope: "/js/" }).then((reg) => {
+      }).catch(err => {
+        console.error(`Service Worker Error: ${err}`);
+      });
+    });
+  }
   getlistings()
-  
-    // Container for Displaying Listings
+
+
+  // Container for Displaying Listings
   var listingsContainer = $(".showcase");
   // Variable to hold our listings
   var listings;
-// This function grabs listings from the database and updates the view
+  // This function grabs listings from the database and updates the view
 
   function getlistings() {
-      $.get("/listings" , function(data) {
+    $.get("/listings", function (data) {
       console.log("listings", data);
       listings = data;
       if (!listings || !listings.length) {
@@ -21,22 +35,22 @@ $(document).ready(function() {
   }
 
 
-//filter listings//________________________________________________________________________>>>>>
+  //filter listings//________________________________________________________________________>>>>>
   function filterBed(search) {
-    $.get("/listings/bedrooms/" + search, function(data) {
-    console.log("listings", data);
-    var url=window.location
-    console.log(url)
-    listings = data;
-    if (!listings || !listings.length) {
-      displayEmpty();
-    }
-    else {
-      initializeRows();
-    }
-  });
-}
-//filter listings//________________________________________________________________________>>>>>
+    $.get("/listings/bedrooms/" + search, function (data) {
+      console.log("listings", data);
+      var url = window.location
+      console.log(url)
+      listings = data;
+      if (!listings || !listings.length) {
+        displayEmpty();
+      }
+      else {
+        initializeRows();
+      }
+    });
+  }
+  //filter listings//________________________________________________________________________>>>>>
 
 
 
@@ -67,12 +81,12 @@ $(document).ready(function() {
     var newlistingsTitle = $("<h2>");
 
     //image//----------------------------------------------------
-    var listingImage= $("<img>");
+    var listingImage = $("<img>");
     listingImage.attr('src', listings.image)
     listingImage.css({
       float: "left"
     })
-//image//--------------------------------------------------------
+    //image//--------------------------------------------------------
 
     // var newlistingsDate = $("<small>");
     var newlistingsAuthor = $("<h5>");
@@ -83,27 +97,27 @@ $(document).ready(function() {
       float: "right",
       color: "blue",
       "margin-top":
-      "-10px"
+        "-10px"
     });
     var newlistingsCardBody = $("<div>");
     newlistingsCardBody.addClass("card-body");
 
 
     //results list//
-    var resultList=$("<ul>");
-    var listItem=$("<li>");
-    var dataBed=$("<h5>");
-    var dataEmail=$("<h5>");
-    var dataSqFt=$("<h5>");
-    dataSqFt.text("Area: "+ listings.sqFootage + " sq. ft.");
-    dataBed.text("Bedrooms: "+ listings.bedrooms);
+    var resultList = $("<ul>");
+    var listItem = $("<li>");
+    var dataBed = $("<h5>");
+    var dataEmail = $("<h5>");
+    var dataSqFt = $("<h5>");
+    dataSqFt.text("Area: " + listings.sqFootage + " sq. ft.");
+    dataBed.text("Bedrooms: " + listings.bedrooms);
     dataEmail.text("Contact email: " + listings.email);
     listItem.append(dataSqFt);
     listItem.append(dataBed);
     listItem.append(dataEmail);
     resultList.append(listItem);
     newlistingsCardBody.append(resultList);
-//results list//
+    //results list//
 
 
     var newlistingsBody = $("<p>");
@@ -130,9 +144,9 @@ $(document).ready(function() {
     newlistingsCard.data("listings", listings);
     return newlistingsCard;
   }
-function displayEmpty(){
-  console.log("nothing!")
-}
+  function displayEmpty() {
+    console.log("nothing!")
+  }
 
 
 
@@ -140,79 +154,81 @@ function displayEmpty(){
 
 
 
-// Buyer Page //
-// Search and Filter Functions//
+  // Buyer Page //
+  // Search and Filter Functions//
 
-$("#searchButton").on("click", function(event){
-  event.preventDefault();
-  var search;
+  $("#searchButton").on("click", function (event) {
+    event.preventDefault();
+    var search;
 
-  if($('input[name="filter"]:checked').val()){
-    var switchVal=$('input[name="filter"]:checked').val();
-      switch (switchVal){
+    if ($('input[name="filter"]:checked').val()) {
+      var switchVal = $('input[name="filter"]:checked').val();
+      switch (switchVal) {
         case "one":
           var min = $("#minPrice").val();
           var max = $("#maxPrice").val();
           var minParse = parseInt(min)
           var maxParse = parseInt(max)
 
-          if(minParse >= 0 && maxParse >=1){
-            priceMatch(minParse,maxParse)
+          if (minParse >= 0 && maxParse >= 1) {
+            priceMatch(minParse, maxParse)
             break;
           }
-          else{
+          else {
             return false;
           }
 
         case "two":
-          var zipCodeArray=[64116, 64106, 64124, 64105, 64123, 64115, 64117, 64120, 64121, 64127, 64101, 64108, 64102, 66101]
+          var zipCodeArray = [64116, 64106, 64124, 64105, 64123, 64115, 64117, 64120, 64121, 64127, 64101, 64108, 64102, 66101]
           var zipcode = $("#areaSelect").val().trim();
-          var zipParse= parseInt(zipcode)
+          var zipParse = parseInt(zipcode)
           var radius = $("#zipRadius").val();
 
-          for(i=0; i<zipCodeArray.length; i++){
-            var zip=zipCodeArray[i];
-            if(radius!="" && zipcode.length===5 && zipParse===zip){
+          for (i = 0; i < zipCodeArray.length; i++) {
+            var zip = zipCodeArray[i];
+            if (radius != "" && zipcode.length === 5 && zipParse === zip) {
               alert("yes")
               areaCode(zipParse, radius)
-              break; 
+              break;
             }
             return false;
-           }
-            
+          }
+
         case "three":
           var bed = $("#bedNum").val();
-          var bedParse=parseInt(bed)
-          if(bedParse >= 1){
-            search=bedParse;
+          var bedParse = parseInt(bed)
+          if (bedParse >= 1) {
+            search = bedParse;
             $("#bedNum").val("")
             filterBed(bedParse)
-            break; 
+            break;
           }
           return false;
-      }      
-}
+      }
+    }
 
-function priceMatch(minParse,maxParse){
-  console.log(minParse)
-  console.log(maxParse)
-}
+    function priceMatch(minParse, maxParse) {
+      console.log(minParse)
+      console.log(maxParse)
+    }
 
-// function bedrooms(bedParse){
-//   var search=bedParse;
-// }
+    // function bedrooms(bedParse){
+    //   var search=bedParse;
+    // }
 
-function areaCode(zipcodeParse, radius){
-  console.log(zipcodeParse)
-  var queryURL="https://api.zip-codes.com/ZipCodesAPI.svc/1.0/FindZipCodesInRadius?zipcode=" + zipcodeParse + "&minimumradius=0&maximumradius=" + radius + "&key=OTXG2RB5WPBTU3O8BZEA";
-    $.ajax({
-    url: queryURL,
-    method: "GET"
-    }).then(function(response) {
-      for(i=0; i<response.DataList.length; i++){
-        console.log(response.DataList[i].Code)
-    }});  
-}}); 
+    function areaCode(zipcodeParse, radius) {
+      console.log(zipcodeParse)
+      var queryURL = "https://api.zip-codes.com/ZipCodesAPI.svc/1.0/FindZipCodesInRadius?zipcode=" + zipcodeParse + "&minimumradius=0&maximumradius=" + radius + "&key=OTXG2RB5WPBTU3O8BZEA";
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function (response) {
+        for (i = 0; i < response.DataList.length; i++) {
+          console.log(response.DataList[i].Code)
+        }
+      });
+    }
+  });
 
 
 })
