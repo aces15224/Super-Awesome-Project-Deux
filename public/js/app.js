@@ -1,22 +1,44 @@
 $(document).ready(function() {
-  getlistings()
+  // getlistings()
+  
     // Container for Displaying Listings
   var listingsContainer = $(".showcase");
   // Variable to hold our listings
   var listings;
 // This function grabs listings from the database and updates the view
-  function getlistings() {
-      $.get("/listings" , function(data) {
-      console.log("listings", data);
-      listings = data;
-      if (!listings || !listings.length) {
-        displayEmpty();
-      }
-      else {
-        initializeRows();
-      }
-    });
-  }
+
+  // function getlistings() {
+  //     $.get("/listings" , function(data) {
+  //     console.log("listings", data);
+  //     listings = data;
+  //     if (!listings || !listings.length) {
+  //       displayEmpty();
+  //     }
+  //     else {
+  //       initializeRows();
+  //     }
+  //   });
+  // }
+
+
+//filter listings//________________________________________________________________________>>>>>
+  function filterBed(search) {
+    $.get("/listings/bedrooms/" + search, function(data) {
+    console.log("listings", data);
+    var url=window.location
+    console.log(url)
+    listings = data;
+    if (!listings || !listings.length) {
+      displayEmpty();
+    }
+    else {
+      initializeRows();
+    }
+  });
+}
+//filter listings//________________________________________________________________________>>>>>
+
+
 
   // InitializeRows handles appending all of our constructed post HTML inside listingsContainer
   function initializeRows() {
@@ -114,10 +136,6 @@ function displayEmpty(){
 
 
 
-})
-
-
-
 
 
 
@@ -127,6 +145,7 @@ function displayEmpty(){
 
 $("#searchButton").on("click", function(event){
   event.preventDefault();
+  var search;
 
   if($('input[name="filter"]:checked').val()){
     var switchVal=$('input[name="filter"]:checked').val();
@@ -165,8 +184,9 @@ $("#searchButton").on("click", function(event){
           var bed = $("#bedNum").val();
           var bedParse=parseInt(bed)
           if(bedParse >= 1){
-            bedrooms(bedParse)
+            search=bedParse;
             $("#bedNum").val("")
+            filterBed(bedParse)
             break; 
           }
           return false;
@@ -178,9 +198,9 @@ function priceMatch(minParse,maxParse){
   console.log(maxParse)
 }
 
-function bedrooms(bedParse){
-  console.log(bedParse)
-}
+// function bedrooms(bedParse){
+//   var search=bedParse;
+// }
 
 function areaCode(zipcodeParse, radius){
   console.log(zipcodeParse)
@@ -195,36 +215,4 @@ function areaCode(zipcodeParse, radius){
 }}); 
 
 
-// // Seller page//
-// // Create Listing Form 
-
-
-// $("#sellButton").on("click", function(event){
-//   event.preventDefault();
-
-//   var newListing = {
-//     sellerName: $("#name").val(),
-//     email: $("#email").val(),
-//     sellingPrice: $("#price").val(),
-//     sqFootage: $("#sqFoot").val(),
-//     bedrooms: $("#bedrooms").val(),
-//     areaZip: $("#areaZip").val(),
-//     image: $("#image").val(),
-//     hotAndCold:$("#hotAndCold").val()
-//   };
-//  console.log(hotAndCold)
-//   $.post("/listings", newListing)
-//     .then(function(data) {
-//     console.log(data);
-//     });
-
-//   $("#name").val("");
-//   $("#email").val("");
-//   $("#price").val("");
-//   $("#sqFoot").val("");
-//   $("#bedrooms").val("");
-//   $("#areaZip").val("");
-//   $("#image").val("");
-//   // CheckBox value may not work
-//   $("#hotAndCold").val("")
-// });
+})
