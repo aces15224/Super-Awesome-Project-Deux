@@ -13,7 +13,7 @@ $(document).ready(function () {
     });
   }
   getlistings()
-
+  
 
   // Container for Displaying Listings
   var listingsContainer = $(".showcase");
@@ -35,7 +35,6 @@ $(document).ready(function () {
   }
 
 
-  //filter listings//________________________________________________________________________>>>>>
   function filterBed(search) {
     $.get("/listings/bedrooms/" + search, function (data) {
       console.log("listings", data);
@@ -51,6 +50,22 @@ $(document).ready(function () {
     });
   }
   //filter listings//________________________________________________________________________>>>>>
+
+  function filterPrice(minParse, maxParse) {
+    $.get("/listings/price?min=" + minParse + "&max=" + maxParse, function (data) {
+      console.log("listings", data);
+      // var url = window.location
+      // console.log(url)
+      listings = data;
+      if (!listings || !listings.length) {
+        displayEmpty();
+      }
+      else {
+        initializeRows();
+      }
+    });
+  }
+
 
 
 
@@ -169,15 +184,17 @@ $(document).ready(function () {
           var max = $("#maxPrice").val();
           var minParse = parseInt(min)
           var maxParse = parseInt(max)
-
+          search=maxParse;
           if (minParse >= 0 && maxParse >= 1) {
-            priceMatch(minParse, maxParse)
+            // filterPrice(minParse, maxParse)
+            
+            filterPrice(minParse, maxParse)
             break;
           }
           else {
             return false;
           }
-
+// priceMatch>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         case "two":
           var zipCodeArray = [64116, 64106, 64124, 64105, 64123, 64115, 64117, 64120, 64121, 64127, 64101, 64108, 64102, 66101]
           var zipcode = $("#areaSelect").val().trim();
@@ -207,25 +224,25 @@ $(document).ready(function () {
       }
     }
 
-    function priceMatch(minParse, maxParse) {
-      console.log(minParse)
-      console.log(maxParse)
-    }
-
-    // function bedrooms(bedParse){
-    //   var search=bedParse;
+    // function priceMatch(minParse, maxParse) {
+    //   console.log(minParse)
+    //   console.log(maxParse)
     // }
 
+   
     function areaCode(zipcodeParse, radius) {
       console.log(zipcodeParse)
+      var apiArray=[];
       var queryURL = "https://api.zip-codes.com/ZipCodesAPI.svc/1.0/FindZipCodesInRadius?zipcode=" + zipcodeParse + "&minimumradius=0&maximumradius=" + radius + "&key=OTXG2RB5WPBTU3O8BZEA";
       $.ajax({
         url: queryURL,
         method: "GET"
       }).then(function (response) {
         for (i = 0; i < response.DataList.length; i++) {
-          console.log(response.DataList[i].Code)
+          apiArray.push(response.DataList[i].Code)
+          
         }
+        console.log(apiArray)
       });
     }
   });
