@@ -49,7 +49,6 @@ $(document).ready(function () {
       }
     });
   }
-  //filter listings//________________________________________________________________________>>>>>
 
   function filterPrice(minParse, maxParse) {
     $.get("/listings/price?min=" + minParse + "&max=" + maxParse, function (data) {
@@ -163,10 +162,39 @@ $(document).ready(function () {
     console.log("nothing!")
   }
 
+  function getZipListings(apiArray) {
+    $.get("/listings", function (data) {
+      console.log("listings", data);
+      console.log(apiArray)
+      listings = data;
+      var matchArray=[];
+      // for(let i=0; i<apiArray.length; i++){
+      //   console.log(apiArray[i])
+      // }
+
+      for(let i=0; i<listings.length; i++){
+        for(let j=0; j<apiArray.length; j++){
+          console.log(apiArray[i])
+          if(apiArray[j]==listings[i].areaZip){
+            matchArray.push(listings[i].areaZip)
+          
+          }
+        }
+        console.log(matchArray)
+        console.log(listings[i].areaZip)
+      }
 
 
 
-
+      
+      if (!listings || !listings.length) {
+        displayEmpty();
+      }
+      else {
+        initializeRows();
+      }
+    });
+  }
 
 
   // Buyer Page //
@@ -194,7 +222,6 @@ $(document).ready(function () {
           else {
             return false;
           }
-// priceMatch>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         case "two":
           var zipCodeArray = [64116, 64106, 64124, 64105, 64123, 64115, 64117, 64120, 64121, 64127, 64101, 64108, 64102, 66101]
           var zipcode = $("#areaSelect").val().trim();
@@ -223,12 +250,6 @@ $(document).ready(function () {
           return false;
       }
     }
-
-    // function priceMatch(minParse, maxParse) {
-    //   console.log(minParse)
-    //   console.log(maxParse)
-    // }
-
    
     function areaCode(zipcodeParse, radius) {
       console.log(zipcodeParse)
@@ -242,7 +263,7 @@ $(document).ready(function () {
           apiArray.push(response.DataList[i].Code)
           
         }
-        console.log(apiArray)
+        getZipListings(apiArray)
       });
     }
   });
