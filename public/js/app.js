@@ -166,33 +166,20 @@ $(document).ready(function () {
     $.get("/listings", function (data) {
       console.log("listings", data);
       console.log(apiArray)
-      listings = data;
+      listings1 = data;
       var matchArray=[];
-      // for(let i=0; i<apiArray.length; i++){
-      //   console.log(apiArray[i])
-      // }
-
-      for(let i=0; i<listings.length; i++){
-        for(let j=0; j<apiArray.length; j++){
-          console.log(apiArray[i])
-          if(apiArray[j]==listings[i].areaZip){
-            matchArray.push(listings[i].areaZip)
-          
-          }
-        }
-        console.log(matchArray)
-        console.log(listings[i].areaZip)
-      }
-
-
-
       
-      if (!listings || !listings.length) {
-        displayEmpty();
+      for(let i=0; i<listings1.length; i++){
+        for(let j=0; j<apiArray.length; j++){
+          console.log(apiArray[j])
+          if(apiArray[j]==listings1[i].areaZip){
+            matchArray.push(listings1[i])
+            listings=matchArray;
+        }
+        }
       }
-      else {
-        initializeRows();
-      }
+      initializeRows(listings);
+      
     });
   }
 
