@@ -1,15 +1,45 @@
-
 html{
   margin:0px;
-  /* max-width: 1300px; */
 }
 
 #headNav{
   background-color:#1d1c1c;
-  height: 100px;
+  height: 120px;
 }
+
 .navbar-toggler{
   background-color:gray;
+}
+
+ /* #collapseBar{
+  height:150px;
+} */
+
+h2{
+  color:white;
+  font-weight:bold;
+  text-decoration: underline;
+}
+
+#navbarToggleExternalContent{
+  height:150px;
+
+} 
+.logged-in, .logged-out, #nav-mobile{
+  width: 100px;
+  clear:both;
+  float:left;
+}
+
+.navbar-brand{
+max-width:700px;
+position: relative;
+left:40%;
+top:0px;
+}
+
+.pageLinks{
+top:0px;
 }
 
 #header{
@@ -33,41 +63,54 @@ body{
   background-position: center; 
   width: auto;
   height: auto;
+  overflow-x:hidden;
 }
 
 #buy, #sell{
-  margin:auto;
-  height:290px;
+  height:100%;
+  width: 100%;
 }
 
+ #buy{
+  padding-right: 30px; 
+}
+
+#sell{
+  padding-left: 30px; 
+} 
 
 #buyAndSell{
   margin: 0 auto;
   position:relative;
-  top: 190px;
+  top: 110px;
 }
 
 #logo{
   font-family: 'Pacifico', cursive;
   padding:0px;
   margin:0 auto;
+  width:388px;
+  height: 110px;
 }
 
 #sellButton{
   background-color:red;
 }
 
-body{
-  height:10000px;
+#searchButton{
+  width:100%;
+  height:35px;
 }
 
 #searchPanel{
   position:fixed;
   border:5px solid blue;
 }
+
 #searchForm{
   background-color:gray;
   color: white;
+  width:300px;
 }
 
 img{
@@ -75,16 +118,38 @@ img{
   height: 200px;
 }
 
-#logo{
-  width:388px;
-  height: 87px;
-} 
-
 .card, .card-body{
-  width: 600px;
+  width: 650px;
+  margin:10px;
+  float:left;
 }
 
-/* input[type=text]{
-  width: 5px;
-  background-color:red;
-} */
+ul, li{
+  list-style-type: none;
+  padding:0px;
+}
+
+.result{
+  padding:0px;
+  margin-right:10px;
+}
+
+input[type="radio"]{
+  transform: scale(2); 
+  margin-left:15px;
+  margin-top:10px;
+}
+
+label{
+  margin:auto;
+  color:black;
+}
+
+.flex-container{
+  display:flex;
+  /* justify-content: center; */
+}
+
+#filterLabel{
+  display:flex;
+}
