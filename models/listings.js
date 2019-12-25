@@ -43,7 +43,7 @@ module.exports = function(sequelize, DataTypes) {
           type: DataTypes.INTEGER,     
           allowNull: false,
           validate: {
-            len: [1, 10],
+            len: [5],
             isInt: true
           }
         },
