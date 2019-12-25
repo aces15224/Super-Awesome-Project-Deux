@@ -5,21 +5,30 @@
     <panel id="searchPanel">
         {{!-- filter controls --}}
     <form id="searchForm">
+      <div class="flex-container">
+        <label for="searchFilter"><h2>Filter Results</h2></label>   
+      </div>  
         {{!-- price match --}}
       <div class="form-group">
-        <input value="one" type="radio" name="filter">
-        <label for="minPrice">Minimum Price</label>
-        <input type="text" class="form-control" id="minPrice" placeholder="Min">
-        <label for="maxPrice">Maximum Price</label>
-        <input type="text" class="form-control" id="maxPrice" placeholder="Max">
-    </div>
+        <div class="flex-container">
+          <input value="one" type="radio" name="filter">
+          <label for="search"><h4>Search by Price</h4></label>   
+        </div>    
+        <input type="text" class="form-control" id="minPrice" placeholder="Your Minimum Price">
+        <hr>
+        <input type="text" class="form-control" id="maxPrice" placeholder="Your Maximum Price">
+      </div>
         {{!-- zipcode match --}}
     <div class="form-group">
-      <input value="two" type="radio" name="filter">
-      <label for="areaSelect">Zip Code</label>
+      <hr>
+      <div class="flex-container">
+        <input value="two" type="radio" name="filter">
+        <label for="areaSelect"><h4>Search by Zip Code</h4></label>
+      </div>
       <input type="text" class="form-control" id="areaSelect" placeholder="Zip Code">
+      <br>
       <select class="form-control" id="zipRadius">
-        <option value=""></option>
+        <option value="">Within how many miles?</option>
         <option value="1">1 mile</option>
         <option value="5">5 miles</option>
         <option value="10">10 miles</option>
@@ -27,10 +36,13 @@
     </div>
         {{!-- bedroom match --}}
     <div class="form-group">
-      <input value="three" type="radio" name="filter">
-      <label for="bedNum">Select by Bedroom</label>
+      <hr>
+      <div class="flex-container">
+        <input value="three" type="radio" name="filter">
+        <label for="bedNum"><h4>Search by Bedroom</h4></label>
+      </div>
       <select class="form-control" id="bedNum">
-        <option value=""></option>
+        <option value="">How Many Bedrooms?</option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
