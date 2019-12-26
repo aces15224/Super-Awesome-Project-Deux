@@ -110,7 +110,7 @@ body{
 #searchForm{
   background-color:gray;
   color: white;
-  width:300px;
+  width:305px;
 }
 
 img{
@@ -140,6 +140,11 @@ input[type="radio"]{
   margin-top:10px;
 }
 
+#zipRadius, #bedNum, input[type="text"]{
+  background-color:black;
+  /* width:100px; */
+ }  
+
 label{
   margin:auto;
   color:black;
@@ -147,9 +152,12 @@ label{
 
 .flex-container{
   display:flex;
-  /* justify-content: center; */
 }
 
 #filterLabel{
   display:flex;
+}
+
+#sellerCard, #sellerBody{
+  margin:auto;
 }
