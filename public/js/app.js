@@ -1,3 +1,33 @@
+var schools=[
+      {schoolName:"Southeast Elementary", zipCode: 64150, rating: 6},
+      {schoolName:"Line Creek Elementary School", zipCode: 64150, rating: 5},
+      {schoolName:"Park Hill South High School", zipCode: 64150, rating: 7},
+      {schoolName:"West Englewood Elementary School", zipCode: 64118, rating: 9},
+      {schoolName:"Clardy Elementary School", zipCode: 64118, rating: 8},
+      {schoolName:"Crestview Elementary School", zipCode: 64116, rating: 8},
+      {schoolName:"Davidson Elementary School", zipCode: 64118, rating: 8},
+      {schoolName:"Oak Park High School", zipCode: 64118, rating: 8},
+      {schoolName:"Topping Elementary School", zipCode: 64117, rating: 8},
+      {schoolName:"Antioch Middle School", zipCode: 64118, rating: 7},
+      {schoolName:"Gracemor Elementary School", zipCode: 64119, rating: 7},
+      {schoolName:"Linden West Elementary School", zipCode: 64118, rating: 7},
+      {schoolName:"Gashland Elementary School", zipCode: 64118, rating: 8},
+      {schoolName:"Maple Park Middle School", zipCode: 64119, rating: 4},
+      {schoolName:"Winnwood Elementary School", zipCode: 64117, rating: 5},
+      {schoolName:"Winnetonka High School", zipCode: 64119, rating: 5},
+      {schoolName:"Eastgate Middle School", zipCode: 64117, rating: 5},
+      {schoolName:"Chouteau Elementary School", zipCode: 64117, rating: 5},
+      {schoolName:"Briarcliff Elementary School", zipCode: 64116, rating: 5},
+      {schoolName:"Northgate Middle School", zipCode: 64118, rating:  6},
+      {schoolName:"Lakewood Elementary School", zipCode: 64117, rating: 6},
+      {schoolName:"Ravenwood Elementary School", zipCode: 64119, rating: 7},
+      {schoolName:"Oakwood Manor Elementary School", zipCode: 64118, rating: 7},
+      {schoolName:"North Kansas City High School", zipCode: 64116, rating: 7},
+      {schoolName:"Meadowbrook Elementary School", zipCode: 64118, rating: 7},
+      {schoolName:"Maplewood Elementary School", zipCode: 64119, rating: 7}
+  ];
+  
+
 $(document).ready(function () {
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.getRegistrations().then(function (registrations) {
@@ -30,6 +60,7 @@ $(document).ready(function () {
       }
       else {
         initializeRows();
+        console.log(schools)
       }
     });
   }
@@ -65,9 +96,6 @@ $(document).ready(function () {
     });
   }
 
-
-
-
   // InitializeRows handles appending all of our constructed post HTML inside listingsContainer
   function initializeRows() {
     listingsContainer.empty();
@@ -92,7 +120,7 @@ $(document).ready(function () {
     // var editBtn = $("<button>");
     // editBtn.text("EDIT");
     // editBtn.addClass("edit btn btn-info");
-    var newlistingsTitle = $("<h2>");
+    var newlistingsTitle = $("<h4>");
 
     //image//----------------------------------------------------
     var listingImage = $("<img>");
@@ -109,9 +137,7 @@ $(document).ready(function () {
     // edit
     newlistingsAuthor.css({
       float: "right",
-      color: "blue",
-      "margin-top":
-        "-10px"
+      color: "blue"
     });
     var newlistingsCardBody = $("<div>");
     newlistingsCardBody.addClass("card-body");
@@ -120,26 +146,32 @@ $(document).ready(function () {
     //results list//
     var resultList = $("<ul>");
     var listItem = $("<li>");
-    var dataBed = $("<h5>");
-    var dataEmail = $("<h5>");
-    var dataSqFt = $("<h5>");
+    var dataBed = $("<p>");
+    var dataEmail = $("<p>");
+    var dataSqFt = $("<p>");
+    var heatCool = $("<p>");
+    heatCool.text("Heating & Cooling: " + listings.hotAndCold);
     dataSqFt.text("Area: " + listings.sqFootage + " sq. ft.");
     dataBed.text("Bedrooms: " + listings.bedrooms);
     dataEmail.text("Contact email: " + listings.email);
     listItem.append(dataSqFt);
     listItem.append(dataBed);
+    listItem.append(heatCool);
     listItem.append(dataEmail);
+    resultList.addClass("result");
     resultList.append(listItem);
     newlistingsCardBody.append(resultList);
     //results list//
 
-
+    resultList.css({
+      float: "right"
+    });
     var newlistingsBody = $("<p>");
     newlistingsBody.css({
       float: "right"
-    })
+    });
     // edit
-    newlistingsBody.text("Contact email: " + listings.email);
+    // newlistingsBody.text("Contact email: " + listings.email);
     newlistingsTitle.text("Asking price: $" + listings.sellingPrice);
     // edit
     // newlistingsDate.text(formattedDate);
@@ -210,7 +242,10 @@ $(document).ready(function () {
             return false;
           }
         case "two":
-          var zipCodeArray = [64116, 64106, 64124, 64105, 64123, 64115, 64117, 64120, 64121, 64127, 64101, 64108, 64102, 66101]
+          
+         //zipcode map // https://www.unitedstateszipcodes.org/64116/
+
+          var zipCodeArray = [64119, 64118, 64116, 64117, 64150]
           var zipcode = $("#areaSelect").val().trim();
           var zipParse = parseInt(zipcode)
           var radius = $("#zipRadius").val();

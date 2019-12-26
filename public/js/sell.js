@@ -2,7 +2,7 @@
 
 $("#sellButton").on("click", function(event){
   event.preventDefault();
-  var zipCodeArray = [64116, 64106, 64124, 64105, 64123, 64115, 64117, 64120, 64121, 64127, 64101, 64108, 64102, 66101]
+  var zipCodeArray = [64119, 64118, 64116, 64117, 64150]
   var zipcode = $("#areaZip").val().trim();
   var zipParse = parseInt(zipcode)
 
