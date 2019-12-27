@@ -8,6 +8,11 @@ $("#sellButton").on("click", function(event){
 
   for (i = 0; i < zipCodeArray.length; i++) {
     var zip = zipCodeArray[i];
+    if ($("#name").val() ==="" || $("#email").val()==="" || $("#price").val()==="" || $("#sqFoot").val()==="" || $("#bedrooms").val()==="" ||
+       $("#areaZip").val()==="" || $("#image").val()===""){
+      $("#invalidInput").modal("toggle")
+      }
+
     if (zipParse === zip) {
       alert("yes")
       var newListing = {
@@ -19,9 +24,7 @@ $("#sellButton").on("click", function(event){
         areaZip: $("#areaZip").val(),
         image: $("#image").val(),
         hotAndCold:$("#hotAndCold").val()
-    };
-  console.log(newListing)
-
+      };
       $.post("/listings", newListing)
         .then(function(data) {
         console.log(data);
@@ -36,6 +39,9 @@ $("#sellButton").on("click", function(event){
       $("#image").val("");
       $("#hotAndCold").val("")
     }
-    return false;
+    else if ($("#name").val() != "" && $("#email").val()!= "" && $("#price").val()!= "" && $("#sqFoot").val()!= "" && $("#bedrooms").val() != "" &&
+            $("#areaZip").val()!= "" && $("#image").val()!= "" && zipParse != zip){
+            $("#invalidZip").modal("toggle")
     }
+  }
 });
