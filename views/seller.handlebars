@@ -1,6 +1,6 @@
 <div class="container" id="sellForm">
   <div class="row">
-    <div class="offset-lg-3 col-lg-4">
+    <div class="offset-lg-3 col-lg-4 col-xs-12">
       <div class="card" id="sellerCard">
         <div class="card-header">
           Create a Listing
@@ -55,6 +55,47 @@
     </div>
   </div>
 </div>
+
+{{!-- Modals --}}
+
+<div id="invalidInput" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Incomplete Form!</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Please do not leave any blanks!</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="invalidZip" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Invalid Zipcode!</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h5>This app supports listings for the North Kansas City Area!  Please check that the zipcode you have entered is within our coverage area!  </h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="/js/sell.js"></script>
