@@ -191,7 +191,7 @@ $(document).ready(function () {
     return newlistingsCard;
   }
   function displayEmpty() {
-    console.log("nothing!")
+    $("#noResults").modal("toggle")
   }
 
   function getZipListings(apiArray) {
@@ -207,13 +207,19 @@ $(document).ready(function () {
           if(apiArray[j]==listings1[i].areaZip){
             matchArray.push(listings1[i])
             listings=matchArray;
-        }
+          }
         }
       }
-      initializeRows(listings);
       
+      if (!matchArray || !matchArray.length) {
+        displayEmpty();
+      }
+      else {
+        initializeRows(listings);
+      } 
     });
   }
+  
 
 
   // Buyer Page //
@@ -222,7 +228,6 @@ $(document).ready(function () {
   $("#searchButton").on("click", function (event) {
     event.preventDefault();
     var search;
-
     if ($('input[name="filter"]:checked').val()) {
       var switchVal = $('input[name="filter"]:checked').val();
       switch (switchVal) {
@@ -232,32 +237,33 @@ $(document).ready(function () {
           var minParse = parseInt(min)
           var maxParse = parseInt(max)
           search=maxParse;
-          if (minParse >= 0 && maxParse >= 1) {
-            // filterPrice(minParse, maxParse)
-            
+          if (minParse >= 0 && maxParse >= 1) {            
             filterPrice(minParse, maxParse)
             break;
           }
           else {
-            return false;
+            $("#invalidPrice").modal("toggle")
           }
         case "two":
           
-         //zipcode map // https://www.unitedstateszipcodes.org/64116/
-
           var zipCodeArray = [64119, 64118, 64116, 64117, 64150]
           var zipcode = $("#areaSelect").val().trim();
           var zipParse = parseInt(zipcode)
           var radius = $("#zipRadius").val();
 
+        
           for (i = 0; i < zipCodeArray.length; i++) {
             var zip = zipCodeArray[i];
-            if (radius != "" && zipcode.length === 5 && zipParse === zip) {
-              alert("yes")
+            if (zipParse!=zip && zipcode.length === 5){
+              $("#invalidModal").modal("toggle")
+            } 
+            else if ($('input[name="filter"]:checked').val() === "two" && radius === "" || $('input[name="filter"]:checked').val() === "two" && zipcode.length != 5){
+              $("#noZipOrRadius").modal("toggle")
+            }
+            else if (radius != "" && zipcode.length === 5 && zipParse === zip) {
               areaCode(zipParse, radius)
               break;
             }
-            return false;
           }
 
         case "three":
@@ -269,9 +275,16 @@ $(document).ready(function () {
             filterBed(bedParse)
             break;
           }
-          return false;
-      }
+          else if ($('input[name="filter"]:checked').val() === "three" && bed < 1){
+          $("#invalidBedNum").modal("toggle")
+          }
+        }
     }
+    else{
+      $("#noRadioModal").modal("toggle")
+      
+    }
+    
    
     function areaCode(zipcodeParse, radius) {
       console.log(zipcodeParse)
@@ -283,12 +296,9 @@ $(document).ready(function () {
       }).then(function (response) {
         for (i = 0; i < response.DataList.length; i++) {
           apiArray.push(response.DataList[i].Code)
-          
         }
         getZipListings(apiArray)
       });
     }
   });
-
-
 })
