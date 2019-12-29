@@ -1,0 +1,177 @@
+<div class="row">  
+  {{!-- search results displayed here --}}
+  <div class="col-lg-10 col-md-10 offset-xs-2 col-xs-6 showcase"></div>
+  <div class="col-lg-2 col-md-2 col-xs-2">
+    <panel id="searchPanel">
+        {{!-- filter controls --}}
+    <form id="searchForm">
+      <div class="flex-container">
+        <label for="searchFilter"><h5 id="h5">Filter Results</h5></label>   
+      </div>  
+        {{!-- price match --}}
+      <div class="form-group">
+        <div class="flex-container">
+          <input value="one" type="radio" name="filter">
+          <label for="search"><h6>Search by Price</h6></label>   
+        </div>    
+        <input type="text" class="form-control" id="minPrice" placeholder="Minimum Price">
+        <br>
+        <input type="text" class="form-control" id="maxPrice" placeholder="Maximum Price">
+      </div>
+        {{!-- zipcode match --}}
+    <div class="form-group">
+      <hr>
+      <div class="flex-container">
+        <input value="two" type="radio" name="filter">
+        <label for="areaSelect"><h6>Search by Zip Code</h6></label>
+      </div>
+      <input type="text" class="form-control" id="areaSelect" placeholder="Zip Code">
+      <br>
+      <select class="form-control" id="zipRadius">
+        <option value="">Search Radius</option>
+        <option value="1">1 mile</option>
+        <option value="5">5 miles</option>
+        <option value="10">10 miles</option>
+      </select>
+    </div>
+        {{!-- bedroom match --}}
+    <div class="form-group">
+      <hr>
+      <div class="flex-container">
+        <input value="three" type="radio" name="filter">
+        <label for="bedNum"><h6>Search by Bedroom</h6></label>
+      </div>
+      <select class="form-control" id="bedNum">
+        <option value="">How Many Bedrooms?</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5+</option>
+      </select>
+    </div>
+      <button id="searchButton" type="button">Push</button>
+    </form>
+    </panel>
+  </div>
+</div> 
+
+{{!-- Modals --}}
+
+<div id="invalidModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Invalid Zipcode!</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h5>This app supports listings for the North Kansas City Area!  Please check that the zipcode you have entered is within our coverage area!  </h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div id="noZipOrRadius" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Invalid Search!</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Please make sure that you have entered a search radius and valid zip code!  </h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="noRadioModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">No Filter Method Selected!</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Make sure you click the radio button next to the filter method you'd like to use!</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="invalidPrice" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Invalid Price Range!</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Please make sure you have entered a valid price range!  Input fields cannot be left blank and the maximum price must be greater than zero!</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="invalidBedNum" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">No Bedroom amount selected!</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Please select how many bedrooms you would like!</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="noResults" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">No Results!</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>No results matching your criteria could be found! Please refine your search!</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

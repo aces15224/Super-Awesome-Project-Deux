@@ -1,0 +1,101 @@
+<div class="container" id="sellForm">
+  <div class="row">
+    <div class="offset-lg-3 col-lg-4 col-xs-12">
+      <div class="card" id="sellerCard">
+        <div class="card-header">
+          Create a Listing
+        </div>
+        <div class="card-body" id="sellerBody">
+          <form action="" method="POST" role="form" id="sellerForm">
+            <div class="form-group">
+              <label for="name">Seller Name</label>
+              <input type="text" class="form-control" id="name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" class="form-control" id="email" placeholder="name@example.com"> 
+            </div>
+            <div class="form-group">
+              <label for="price">Asking Price</label>
+              <input type="text" class="form-control" id="price">   
+            </div>
+            <div class="form-group">
+              <label for="sqFoot">Square Footage</label>
+              <input type="text" class="form-control" id="sqFoot">  
+            </div>
+            <div class="form-group">
+              <label for="bedrooms">Bedrooms</label>
+              <select class="form-control" id="bedrooms">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="areaZip">Zipcode</label>
+              <input type="text" class="form-control" id="areaZip">
+            </div>
+            <div class="form-group">
+              <label for="image">Link to Image</label>
+              <input type="text" class="form-control" id="image">
+            </div>
+            <div class="form-group">
+              <label for="hotAndCold">Includes Heating and Cooling</label>
+              <input type="checkbox" name="heating" value="1" id="hotAndCold"> 
+            </div>
+          </form>
+          <br>
+          <div class="text-right">
+            <button type="button" id="sellButton"><span class="fa fa-plus"></span>Create Listing</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Modals --}}
+
+<div id="invalidInput" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Incomplete Form!</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Please do not leave any blanks!</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="invalidZip" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Invalid Zipcode!</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h5>This app supports listings for the North Kansas City Area!  Please check that the zipcode you have entered is within our coverage area!  </h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/sell.js"></script>
