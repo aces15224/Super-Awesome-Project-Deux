@@ -14,9 +14,9 @@
   <div id="header">
     <div class="pos-f-t">
       <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-dark p-4">
-          <h5 class="text-white h4">Collapsed content</h5>
-          <span class="text-muted">Toggleable via the navbar brand.</span>
+        <div class="bg-dark p-4" id="collapseBar">
+          {{!-- <h5 class="text-white h4">Collapsed content</h5>
+          <span class="text-muted">Toggleable via the navbar brand.</span> --}}
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li class="logged-in">
               <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
@@ -31,16 +31,16 @@
               <a href="#" class="grey-text modal-trigger" data-target="#modal-signup" data-toggle="modal">Sign up</a>
             </li>
           </ul>
-          <ul id="pageLinks">
-            <li>
+          <ul class="navbar-brand hide-on-med-and-down" id="nav">
+            <li class="pageLinks">
               <a href="/">Home</a>
             </li>
-            <li>
+            <li class="pageLinks">
               <a href="/buy">Buy</a>
-            </li>
-            <li>
+            </liclass="pageLinks">
+            <li class="pageLinks">
               <a href="/sell">Sell</a>
-            </li>
+            </liclass="pageLinks">
           </ul>
         </div>
       </div>
