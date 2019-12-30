@@ -34,7 +34,7 @@ $(document).ready(function () {
     const password = signupForm['signup-password'].value;
 
     // sign up the user & add firestore data
-    auth.createUserWithEmailAndPassword(email, password).then(cred => {
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(cred => {
       return db.collection('users').doc(cred.user.uid).set({
         bio: signupForm['signup-bio'].value
       });
