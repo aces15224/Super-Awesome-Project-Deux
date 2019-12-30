@@ -67,7 +67,7 @@ $(document).ready(function () {
     const password = loginForm['login-password'].value;
 
     // log the user in
-    auth.signInWithEmailAndPassword(email, password).then((cred) => {
+    firebase.auth().signInWithEmailAndPassword(email, password).then((cred) => {
       // close the signup modal & reset form
       const modal = document.querySelector('#modal-login');
       M.Modal.getInstance(modal).close();
