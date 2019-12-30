@@ -1,34 +1,34 @@
 <div class="row">  
   {{!-- search results displayed here --}}
-  <div class="col-lg-10 showcase"></div>
-  <div class="col-lg-2">
+  <div class="col-lg-10 col-md-10 offset-xs-2 col-xs-6 showcase"></div>
+  <div class="col-lg-2 col-md-2 col-xs-2">
     <panel id="searchPanel">
         {{!-- filter controls --}}
     <form id="searchForm">
       <div class="flex-container">
-        <label for="searchFilter"><h2>Filter Results</h2></label>   
+        <label for="searchFilter"><h5 id="h5">Filter Results</h5></label>   
       </div>  
         {{!-- price match --}}
       <div class="form-group">
         <div class="flex-container">
           <input value="one" type="radio" name="filter">
-          <label for="search"><h4>Search by Price</h4></label>   
+          <label for="search"><h6>Search by Price</h6></label>   
         </div>    
-        <input type="text" class="form-control" id="minPrice" placeholder="Your Minimum Price">
-        <hr>
-        <input type="text" class="form-control" id="maxPrice" placeholder="Your Maximum Price">
+        <input type="text" class="form-control" id="minPrice" placeholder="Minimum Price">
+        <br>
+        <input type="text" class="form-control" id="maxPrice" placeholder="Maximum Price">
       </div>
         {{!-- zipcode match --}}
     <div class="form-group">
       <hr>
       <div class="flex-container">
         <input value="two" type="radio" name="filter">
-        <label for="areaSelect"><h4>Search by Zip Code</h4></label>
+        <label for="areaSelect"><h6>Search by Zip Code</h6></label>
       </div>
       <input type="text" class="form-control" id="areaSelect" placeholder="Zip Code">
       <br>
       <select class="form-control" id="zipRadius">
-        <option value="">Within how many miles?</option>
+        <option value="">Search Radius</option>
         <option value="1">1 mile</option>
         <option value="5">5 miles</option>
         <option value="10">10 miles</option>
@@ -39,7 +39,7 @@
       <hr>
       <div class="flex-container">
         <input value="three" type="radio" name="filter">
-        <label for="bedNum"><h4>Search by Bedroom</h4></label>
+        <label for="bedNum"><h6>Search by Bedroom</h6></label>
       </div>
       <select class="form-control" id="bedNum">
         <option value="">How Many Bedrooms?</option>
