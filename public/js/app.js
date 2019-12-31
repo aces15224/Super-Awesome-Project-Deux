@@ -60,11 +60,9 @@ $(document).ready(function () {
       }
       else {
         initializeRows();
-        console.log(schools)
       }
     });
   }
-
 
   function filterBed(search) {
     $.get("/listings/bedrooms/" + search, function (data) {
@@ -101,7 +99,13 @@ $(document).ready(function () {
     listingsContainer.empty();
     var listingsToAdd = [];
     for (var i = 0; i < listings.length; i++) {
-      listingsToAdd.push(createNewRow(listings[i]));
+      if (listings.length>1){
+        listingsToAdd.push(createNewRow(listings[i]));
+      }
+      else{
+        listingsToAdd.push(createDetailPage(listings[i]));
+      }
+      
     }
     listingsContainer.append(listingsToAdd);
   }
@@ -112,6 +116,8 @@ $(document).ready(function () {
     // formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
     var newlistingsCard = $("<div>");
     newlistingsCard.addClass("card");
+    newlistingsCard.addClass("listings-card");
+
     var newlistingsCardHeading = $("<div>");
     newlistingsCardHeading.addClass("card-header");
     // var deleteBtn = $("<button>");
@@ -120,20 +126,22 @@ $(document).ready(function () {
     // var editBtn = $("<button>");
     // editBtn.text("EDIT");
     // editBtn.addClass("edit btn btn-info");
-    var newlistingsTitle = $("<h4>");
+    var newlistingsTitle = $("<h5>");
 
     //image//----------------------------------------------------
     var listingImage = $("<img>");
-    listingImage.attr('src', listings.image)
+    listingImage.addClass("listing-image");
+    listingImage.attr('src', listings.image);
+    listingImage.attr('id', listings.id);
     listingImage.css({
       float: "left"
-    })
+    });
     //image//--------------------------------------------------------
 
     // var newlistingsDate = $("<small>");
-    var newlistingsAuthor = $("<h5>");
+    var newlistingsAuthor = $("<h7>");
     // edit
-    newlistingsAuthor.text("Created by: " + listings.sellerName);
+    newlistingsAuthor.text("Lister: " + listings.sellerName);
     // edit
     newlistingsAuthor.css({
       float: "right",
@@ -153,7 +161,7 @@ $(document).ready(function () {
     heatCool.text("Heating & Cooling: " + listings.hotAndCold);
     dataSqFt.text("Area: " + listings.sqFootage + " sq. ft.");
     dataBed.text("Bedrooms: " + listings.bedrooms);
-    dataEmail.text("Contact email: " + listings.email);
+    dataEmail.text("Email: " + listings.email);
     listItem.append(dataSqFt);
     listItem.append(dataBed);
     listItem.append(heatCool);
@@ -190,6 +198,78 @@ $(document).ready(function () {
     newlistingsCard.data("listings", listings);
     return newlistingsCard;
   }
+
+  function createDetailPage(listings) {
+    var newlistingsCard = $("<div>");
+    newlistingsCard.addClass("card");
+    newlistingsCard.addClass("details-card");
+
+    var mainImage = $("<img>");
+    mainImage.addClass("card-img-top");
+    mainImage.addClass("detail-image");
+    mainImage.attr('src', listings.image);
+
+    var newlistingsCardHeading = $("<div>");
+    newlistingsCardHeading.addClass("card-header");
+
+    var newlistingsTitle = $("<h5>");
+    newlistingsTitle.text("Asking price: $" + listings.sellingPrice);
+    var newlistingsAuthor = $("<h7>");
+    newlistingsAuthor.text("Lister: " + listings.sellerName);
+    newlistingsAuthor.css({
+      float: "right",
+      color: "blue"
+    });
+
+    var newlistingsCardBody = $("<div>");
+    newlistingsCardBody.addClass("card-body");
+    newlistingsCardBody.addClass("details-card-body");
+
+    var detailList = $("<ul>");
+    detailList.addClass("list-group list-group-flush")
+    var listItemDetail = $("<li>");
+    listItemDetail.addClass("list-group-item")
+    var dataBedDetail = $("<p>");
+    var dataEmailDetail = $("<p>");
+    var dataSqFtDetail = $("<p>");
+    var heatCoolDetail = $("<p>");
+    detailList.css({
+      float: "left",
+    });
+
+    var addDetail = $("<p>");
+    addDetail.addClass("card-text");
+    addDetail.text("Additional Details: " + listings.listingDetails);
+    addDetail.css({
+      float: "right",
+    });
+
+    heatCoolDetail.text("Heating & Cooling: " + listings.hotAndCold);
+    dataSqFtDetail.text("Area: " + listings.sqFootage + " sq. ft.");
+    dataBedDetail.text("Bedrooms: " + listings.bedrooms);
+    dataEmailDetail.text("Email: " + listings.email);
+    listItemDetail.append(dataSqFtDetail);
+    listItemDetail.append(dataBedDetail);
+    listItemDetail.append(heatCoolDetail);
+    listItemDetail.append(dataEmailDetail);
+    detailList.append(listItemDetail);
+
+    newlistingsCardHeading.append(newlistingsAuthor);
+    newlistingsCardHeading.append(newlistingsTitle);
+    newlistingsCardBody.append(detailList);
+    newlistingsCardBody.append(addDetail);
+
+
+
+    newlistingsCard.append(mainImage);
+    newlistingsCard.append(newlistingsCardHeading);
+    newlistingsCard.append(newlistingsCardBody)
+
+
+    newlistingsCard.data("listings", listings);
+    return newlistingsCard;
+  }
+
   function displayEmpty() {
     $("#noResults").modal("toggle")
   }
@@ -219,7 +299,22 @@ $(document).ready(function () {
       } 
     });
   }
-  
+
+// On'click Function For Listing Params 
+
+  $(document).on("click", ".listing-image", function(){
+    console.log(this.id)
+    $.get("/listings/listings"+ this.id, function (data) {
+      console.log("listings", data);
+      listings = data;
+      if (!listings || !listings.length) {
+        displayEmpty();
+      }
+      else {
+        initializeRows();
+      }
+    });
+  })
 
 
   // Buyer Page //
@@ -239,6 +334,8 @@ $(document).ready(function () {
           search=maxParse;
           if (minParse >= 0 && maxParse >= 1) {            
             filterPrice(minParse, maxParse)
+            $("#minPrice").val("");
+            $("#maxPrice").val("");
             break;
           }
           else {
@@ -262,6 +359,7 @@ $(document).ready(function () {
             }
             else if (radius != "" && zipcode.length === 5 && zipParse === zip) {
               areaCode(zipParse, radius)
+              $("#areaSelect").val("")
               break;
             }
           }
