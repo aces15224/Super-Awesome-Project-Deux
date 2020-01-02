@@ -1,3 +1,46 @@
+function schoolsInfo(listings){
+  var schoolZipArray = [];
+  var top5 = 0;
+  var topRating = 0;
+  var sum = 0;
+  var average = 0;
+  var averageFixed= 0;
+
+  for(let i=0; i<schools.length; i++){
+    if (schools[i].zipCode === listings[0].areaZip){
+      schoolZipArray.push(schools[i]);
+      console.log(schoolZipArray)
+    }
+  }
+
+  for(let i=0; i<schoolZipArray.length; i++){
+    sum+=schoolZipArray[i].rating
+    average= sum/schoolZipArray.length
+    averageFixed=average.toFixed(2);
+    $("#average").html("<b>Average School Rating:</b> " + averageFixed);
+  }
+
+
+
+  for(let i=0; i<schoolZipArray.length; i++){
+    if(schoolZipArray[i].rating>=7){
+      top5 ++;
+      console.log(schoolZipArray)
+    }
+      $("#tops").html("<b>Number of Top 3 Schools in the area: </b>" + top5);
+  }
+  
+  for(let i=0; i<schoolZipArray.length; i++){
+    if(schoolZipArray[i].rating>topRating){
+      topRating=schoolZipArray[i].rating;        
+    }
+    if(schoolZipArray[i].rating===topRating){
+      console.log(topRating);
+      $("#schoolNames").html("<b>Top Rated School: </b>" + schoolZipArray[i].schoolName + " (" + schoolZipArray[i].rating + "/10)");
+    }
+  }
+}; 
+
 var schools=[
       {schoolName:"Southeast Elementary", zipCode: 64150, rating: 6},
       {schoolName:"Line Creek Elementary School", zipCode: 64150, rating: 5},
@@ -198,8 +241,15 @@ $(document).ready(function () {
     newlistingsCard.data("listings", listings);
     return newlistingsCard;
   }
+  $(document).on("click", ".specs.btn", function(){ 
+       $("#specs").modal("toggle")})
+  
+  $(document).on("click", ".school.btn", function(){
+    schoolsInfo(listings)
+    $("#school").modal("toggle")})
 
   function createDetailPage(listings) {
+    var modalList= $("#detailList");
     var newlistingsCard = $("<div>");
     newlistingsCard.addClass("card");
     newlistingsCard.addClass("details-card");
@@ -224,7 +274,9 @@ $(document).ready(function () {
     var newlistingsCardBody = $("<div>");
     newlistingsCardBody.addClass("card-body");
     newlistingsCardBody.addClass("details-card-body");
-
+    
+    var listDiv = $("<div>");
+    listDiv.addClass("col-xs-6")
     var detailList = $("<ul>");
     detailList.addClass("list-group list-group-flush")
     var listItemDetail = $("<li>");
@@ -234,15 +286,26 @@ $(document).ready(function () {
     var dataSqFtDetail = $("<p>");
     var heatCoolDetail = $("<p>");
     detailList.css({
-      float: "left",
+      float: "left"
     });
+    listDiv.append(detailList);
 
-    var addDetail = $("<p>");
+    var addDetail = $("<div>");
     addDetail.addClass("card-text");
-    addDetail.text("Additional Details: " + listings.listingDetails);
-    addDetail.css({
-      float: "right",
-    });
+    addDetail.addClass("col-xs-6");
+    titleText = $("<h6>");
+    titleText.text("Additional Details")
+    detailText = $("<p>");
+    detailText.text(listings.listingDetails);
+    // detailText.css({
+    //   float: "right",
+    //   maxWidth: "300px",
+    //   width: "auto",
+    //   padding: "12px"
+    // });
+    addDetail.prepend(titleText);
+
+    addDetail.append(detailText);
 
     heatCoolDetail.text("Heating & Cooling: " + listings.hotAndCold);
     dataSqFtDetail.text("Area: " + listings.sqFootage + " sq. ft.");
@@ -254,16 +317,56 @@ $(document).ready(function () {
     listItemDetail.append(dataEmailDetail);
     detailList.append(listItemDetail);
 
+    var footer = $("<div>");
+    footer.addClass("card-footer")
+    var buttonDiv = $("<div>");
+    buttonDiv.addClass("col-xs-6")
+    var buttonList = $("<ul>");
+    buttonList.addClass("list-group list-group-flush")
+    var buttonListItem = $("<li>");
+    buttonListItem.addClass("list-group-item")
+    var deleteBtn = $("<button>");
+    deleteBtn.text("DELETE");
+    deleteBtn.addClass("delete btn btn-danger");
+    var editBtn = $("<button>");
+    editBtn.text("EDIT");
+    editBtn.addClass("edit btn btn-info");
+    var schoolBtn = $("<button>");
+    schoolBtn.text("SCHOOL INFO");
+    schoolBtn.addClass("school btn btn-warning");
+    var specsButton = $("<button>");
+    specsButton.text("SPECS");
+    specsButton.addClass("specs btn btn-success");
+    
+    buttonListItem.append(specsButton);
+    buttonListItem.append(schoolBtn);
+    buttonListItem.append(editBtn);
+    buttonListItem.append(deleteBtn);
+    
+
+    
+    buttonDiv.css({
+      float: "right"
+    });
+    buttonList.append(buttonListItem);
+    buttonDiv.append(buttonList);
+    footer.append(buttonDiv);
+    modalList.append(detailList);
+
+
     newlistingsCardHeading.append(newlistingsAuthor);
     newlistingsCardHeading.append(newlistingsTitle);
-    newlistingsCardBody.append(detailList);
+    // newlistingsCardBody.append(listDiv);
     newlistingsCardBody.append(addDetail);
 
 
 
     newlistingsCard.append(mainImage);
     newlistingsCard.append(newlistingsCardHeading);
-    newlistingsCard.append(newlistingsCardBody)
+    newlistingsCard.append(newlistingsCardBody);
+    newlistingsCard.append(footer);
+
+
 
 
     newlistingsCard.data("listings", listings);
