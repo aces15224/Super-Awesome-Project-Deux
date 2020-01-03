@@ -15,67 +15,101 @@ $(document).ready(function () {
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
   }
-  // Initialize Firebase
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function (registrations) {
+      for (var registration of registrations) {
+        registration.unregister();
+        console.log("Unregistered Service Workers");
+      }
+    }).then(() => {
+      navigator.serviceWorker.register("./service-worker.js", { scope: "/" }).then((reg) => {
+      }).catch(err => {
+        console.error(`Service Worker Error: ${err}`);
+      });
+    });
+  }
 
 
-  //listen for auth changes
+  //LISTEN FOR AUTH CHANGES
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
-      return user;
+      const firebaseUserId = firebase.auth().currentUser.uid;
+      const firebaseEmail = firebase.auth().currentUser.email;
+      //const firebaseDisplayName = firebase.auth().currentUser.displayName;
+      //const firebasePhoneNumber = firebase.auth().currentUser.phoneNumber;
+      //const firebasePhotoURL = firebase.auth().currentUser.photoURL;
+
+      localStorage.setItem("firebase_userId", firebaseUserId);
+      localStorage.setItem("firebase_email", firebaseEmail);
+      //localStorage.setItem("firebase_displayName", firebaseDisplayName);
+      //localStorage.setItem("firebase_phoneNumber", firebasePhoneNumber);
+      //localStorage.setItem("firebase_photoURL", firebasePhotoURL);
+
+      $.ajax({
+        type: "GET",
+        url: "/api/users/firebase/" + localStorage.getItem("firebase_userId")
+      }).then((res) => {
+        localStorage.setItem("dbUserId", res.id);
+        localStorage.setItem("dbFirstName", res.firstName);
+        localStorage.setItem("dbLastName", res.lastName);
+      });
     }
   });
-  //sign up
-  const signupForm = document.querySelector('#signup-form');
-  signupForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+  // LOG IN
+  $(document).on("click", "#login-button", (event) => {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+    const email = $("#login-email").val().toString().toLowerCase().trim();
+    const password = $("#login-password").val().toString().trim();
 
-    // get user info
-    const email = signupForm['signup-email'].value;
-    const password = signupForm['signup-password'].value;
+    firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
+      if (document.getElementById("remember-login-check").checked) {
+        localStorage.clear();
+        localStorage.setItem("remember-signin-email", email);
+      }
+      window.location.assign("/");
+    }).catch(event => {
+      console.log(event.message);
+    });
 
-    // sign up the user & add firestore data
-    auth.createUserWithEmailAndPassword(email, password).then(cred => {
-      return db.collection('users').doc(cred.user.uid).set({
-        bio: signupForm['signup-bio'].value
-      });
+
+  });
+  // SIGN UP
+  $(document).on("click", "#sign-up-button", (event) => {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+    const email = $("#signup-email").val().toString().toLowerCase().trim();
+    const password = $("#signup-password").val().toString().trim();
+
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(event => {
+      console.log(event.message);
     }).then(() => {
-      // close the signup modal & reset form
-      const modal = document.querySelector('#modal-signup');
-      M.Modal.getInstance(modal).close();
-      signupForm.reset();
-      signupForm.querySelector('.error').innerHTML = ''
+      $.ajax({
+        type: "POST",
+        url: "/api/users/add",
+        data: {
+          provider: firebase.auth().currentUser.providerData[0].providerId,
+          email: firebase.auth().currentUser.email,
+          firebaseUID: firebase.auth().currentUser.uid
+        }
+      }).then((res) => {
+        window.location.assign("/");
+        const modal = document.querySelector('#modal-signup');
+        M.Modal.getInstance(modal).close();
+        signupForm.reset();
+      });
+
+    });
+  });
+  //LOG OUT
+  $(document).on("click", "#log-off-button", (event) => {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+    firebase.auth().signOut().then(() => {
+      window.location.href = "/";
     }).catch(err => {
-      signupForm.querySelector('.error').innerHTML = err.message;
+      console.error(err)
     });
   });
 
-  //Logout
-  var logout = document.querySelector("#logout")
-  logout.addEventListener("click", function e() {
-    e.preventDefault();
-    auth.signOut().then(() => {
-    });
-  });
-
-  //Login
-  const loginForm = document.querySelector('#login-form');
-  loginForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    // get user info
-    const email = loginForm['login-email'].value;
-    const password = loginForm['login-password'].value;
-
-    // log the user in
-    auth.signInWithEmailAndPassword(email, password).then((cred) => {
-      // close the signup modal & reset form
-      const modal = document.querySelector('#modal-login');
-      M.Modal.getInstance(modal).close();
-      loginForm.reset();
-      loginForm.querySelector('.error').innerHTML = '';
-    }).catch(err => {
-      loginForm.querySelector('.error').innerHTML = err.message;
-    });
-
-  });
 });

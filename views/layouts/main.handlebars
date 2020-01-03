@@ -4,11 +4,9 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="/styles/stylesIndex.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
   <title>Housing App</title>
 </head>
 
@@ -16,9 +14,9 @@
   <div id="header">
     <div class="pos-f-t">
       <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-dark p-4">
-          <h5 class="text-white h4">Collapsed content</h5>
-          <span class="text-muted">Toggleable via the navbar brand.</span>
+        <div class="bg-dark p-4" id="collapseBar">
+          {{!-- <h5 class="text-white h4">Collapsed content</h5>
+          <span class="text-muted">Toggleable via the navbar brand.</span> --}}
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li class="logged-in">
               <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
@@ -33,10 +31,24 @@
               <a href="#" class="grey-text modal-trigger" data-target="#modal-signup" data-toggle="modal">Sign up</a>
             </li>
           </ul>
+          <ul class="navbar-brand hide-on-med-and-down" id="nav">
+            <li class="pageLinks">
+              <a href="/">Home</a>
+            </li>
+            <li class="pageLinks">
+              <a href="/buy">Buy</a>
+            </li>
+            <li class="pageLinks">
+              <a href="/sell">Sell</a>
+            </li>
+            <li class="pageLinks">
+              <a href="/about">About</a>
+            </li>
+          </ul>
         </div>
       </div>
       <nav id="headNav" class="navbar navbar-dark">
-        <img id="logo" src="./img/logo1.png">
+        <a class="logo" href="/"><img class="logo" src="./img/logo1.png"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
           aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -46,7 +58,7 @@
   </div>
 
   <!-- SIGN UP MODAL -->
-  <div id="modal-signup" class="modal">
+  {{!-- <div id="modal-signup" class="modal">
     <div class="modal-content">
       <h4>Sign up</h4><br />
       <form id="signup-form">
@@ -85,33 +97,36 @@
       <h4>Account details</h4><br />
       <div class="account-details"></div>
     </div>
-  </div>
+  </div> --}}
 
   {{{body}}}
 
-  <div id="footer">Hello</div>
+  <div id="footer">&#9400;2019</div>
   <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
+  {{!-- <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-firestore.js"></script> --}}
 
   <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-  <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-analytics.js"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  {{!-- <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-analytics.js"></script> --}}
+    
+  {{!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="/js/auth.js"></script>
-  <script src="/js/index.js"></script>
-  <script src="/js/app.js"></script>
+    crossorigin="anonymous"></script> --}}
+  {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> --}}
+  {{!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --}}
+  {{!-- <script src="/js/auth.js"></script>
+  <script src="/js/index.js"></script> --}}
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="/js/app.js"></script>
 </body>
 
 </html>

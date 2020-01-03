@@ -1,19 +1,59 @@
-
 html{
   margin:0px;
-  /* max-width: 1300px; */
 }
 
 #headNav{
   background-color:#1d1c1c;
+  height: 110px;
+}
+
+#logo{
+  font-family: 'Pacifico', cursive;
+  padding:0px;
+  margin:0 auto;
+  width:388px;
   height: 100px;
 }
+
 .navbar-toggler{
   background-color:gray;
 }
 
+ /* #collapseBar{
+  height:150px;
+} */
+
+#h5{
+  margin-top:15px;
+  color:white;
+  font-weight:bold;
+  text-decoration: underline;
+}
+
+#navbarToggleExternalContent{
+  height:150px;
+
+} 
+.logged-in, .logged-out, #nav-mobile{
+  width: 100px;
+  clear:both;
+  float:left;
+}
+
+.navbar-brand{
+max-width:700px;
+position: relative;
+left:40%;
+top:0px;
+}
+
+.pageLinks{
+top:0px;
+}
+
 #header{
   width:100%;
+  /* position:fixed; */
 }
 
 #footer{
@@ -33,58 +73,353 @@ body{
   background-position: center; 
   width: auto;
   height: auto;
+  overflow-x:hidden;
 }
 
 #buy, #sell{
-  margin:auto;
-  height:290px;
+  height:90%;
+  width: 90%;
 }
 
+#buy{
+  padding-right: 30px; 
+}
+
+#sell{
+  padding-left: 30px; 
+}
+
+#labelOne, #labelTwo{
+  position: relative;
+  top: 58%;
+  /* font-size: 75px; */
+  font-size: 475%;
+  font-weight: bold;
+  margin:0;
+  text-align: center;
+  letter-spacing: 3px;
+  font-family: 'Alfa Slab One', cursive;
+  animation-name: titleSequence;
+  animation-duration: 3s;
+}
+
+#labelOne{
+  color:green;
+  padding-right: 40px;
+}
+
+#labelTwo{
+  color:red;
+}
+
+@keyframes titleSequence{
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
 
 #buyAndSell{
   margin: 0 auto;
   position:relative;
-  top: 190px;
-}
-
-#logo{
-  font-family: 'Pacifico', cursive;
-  padding:0px;
-  margin:0 auto;
+  top: -60px;
 }
 
 #sellButton{
   background-color:red;
 }
 
-body{
-  height:10000px;
+#searchButton{
+  width:170px;
+  height:35px;
+  margin: auto;
+  display:block;
+  border-radius: 5px;
+  border: 1px solid black;
 }
 
-#searchPanel{
-  position:fixed;
-  border:5px solid blue;
-}
+
+/* #searchPanel{
+  position:fixed; 
+  right:0.5px;
+  border: 2px solid black;
+  border-right: 2px solid black;
+
+}  */
+
 #searchForm{
   background-color:gray;
   color: white;
+  width:200px;
+  height:523px;
+  /* right:-12px; */
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  /* float:right;
+  clear:both; */
+
 }
 
 img{
-  width:250px;
-  height: 200px;
+  width:210px;
+  height: 170px;
+  padding-left:0;
+  padding-right:0px;
+  margin:0px;
 }
-
-#logo{
-  width:388px;
-  height: 87px;
-} 
 
 .card, .card-body{
-  width: 600px;
+  width: 500px;
+  margin:10px;
+  float:left;
+  clear:right;
 }
 
-/* input[type=text]{
-  width: 5px;
-  background-color:red;
+ul, li{
+  list-style-type: none;
+  padding:0px;
+}
+
+/* .result{
+  padding:0px;
+  margin-right:10px;
+  font-size:12px;
 } */
+
+input[type="radio"]{
+  transform: scale(1.5); 
+  margin-left:15px;
+  margin-top:5px;
+}
+
+#zipRadius, #bedNum, #areaSelect, #minPrice, #maxPrice{
+  /* background-color:black; */
+  text-align: center;
+  width:170px;
+  font-size:12px;
+  padding: 0px;
+  margin: 0 auto;
+  border:black 0.5px solid;
+}  
+#sellerCard{
+  top:10px; 
+  padding-bottom:20px;
+}
+
+br, hr{
+  margin:0px;
+  padding:0px;
+}
+
+label{
+  margin:auto;
+  color:black;
+}
+
+.flex-container{
+  display:flex;
+}
+
+#filterLabel{
+  display:flex;
+}
+
+#sellerCard, #sellerBody{
+  margin:auto;
+}
+@media screen and (max-width: 1281px) {
+  img{
+    width:190px;
+    height: 160px;
+    padding-left:0;
+    padding-right:0px;
+    margin:0px;
+  }
+  
+  .card, .card-body{
+    width: 475px;
+    margin: 3px;
+    padding:0;
+  }
+}
+@media screen and (max-width: 1193px) {
+  img{
+    width:190px;
+    height: 150px;
+    padding-left:0;
+    padding-right:0px;
+    margin:0px;
+  }
+  
+  .card, .card-body{
+    width: 450px;
+    margin: 3px;
+    padding:0;
+  }
+  li{
+    font-size:12px;
+  }
+}
+
+ @media screen and (max-width: 1134px) {
+  img{
+    width:180px;
+    height: 140px;
+  }  
+  
+  .card, .card-body{
+    width: 430px;
+  }
+
+  li{
+    font-size:12px;
+  }
+  #searchPanel{
+    padding-right:10px;
+
+}  
+@media screen and (max-width: 1086px) {
+  img{
+    width:160px;
+    height: 130px;
+  }  
+  
+  .card, .card-body{
+    width: 400px;
+  }
+
+  li{
+    font-size:10px;
+  }
+  #searchPanel{
+    padding-right:10px;
+} 
+.card-header{
+  font-size:10px;}
+}
+
+@media screen and (max-width: 1014px) {
+  img{
+    width:150px;
+    height: 120px;
+  }  
+  
+  .card, .card-body{
+    width: 370px;
+  }
+}
+
+@media screen and (max-width: 942px) {
+  img{
+    width:150px;
+    height: 120px;
+  }  
+  
+  .card, .card-body{
+    width: 400px;
+    margin:3px auto;
+    float:none;
+  }
+
+
+}
+
+
+/* 
+@media screen and (max-width: 995px) {
+  #buy, #sell{
+    height:100%;
+    width: 100%;
+  }
+
+  #labelOne, #labelTwo{
+    top: 62%;
+    font-size: 450%; 
+  }
+} */
+ /* @media screen and (min-width:677px)  {
+  #buy{
+    height:50%;
+    width: 50%;
+    padding-left:50px;
+    padding-right: 0px;
+  }
+  #sell{
+    height:50%;
+    width: 50%;
+    padding-left:50px;
+    padding-right: 0px;
+  }
+
+
+  #labelOne, #labelTwo{
+    top: 55%;
+    font-size: 450%; 
+  }
+}  */
+
+
+@media screen and (max-width:782px) {
+  #buy{
+    height:85%;
+    width: 85%;
+    padding-left:50px;
+    padding-right: 0px;
+  }
+  #sell{
+    height:85%;
+    width: 85%;
+    padding-left:50px;
+    padding-right: 0px;
+  }
+
+
+  #labelOne, #labelTwo{
+    top: 55%;
+    font-size: 450%; 
+  }
+
+  #buyAndSell{
+    margin: 0 auto;
+    position:relative;
+    top: -80px;
+  }
+} 
+
+
+
+/* 
+  
+#buy, #sell{
+  height:100%;
+  width: 100%;
+}
+
+#buy{
+  padding-right: 30px; 
+}
+
+#sell{
+  padding-left: 30px; 
+}
+
+#labelOne, #labelTwo{
+  position: relative;
+  top: 58%;
+  /* font-size: 75px; */
+  /* font-size: 475%;
+  font-weight: bold;
+  margin:0;
+  text-align: center;
+  letter-spacing: 3px;
+  font-family: 'Alfa Slab One', cursive;
+  animation-name: titleSequence;
+  animation-duration: 3s;
+}
+
+#labelOne{
+  color:green;
+}
+
+#labelTwo{
+  color:red;
+}  */

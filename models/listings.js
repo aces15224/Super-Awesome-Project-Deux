@@ -43,7 +43,7 @@ module.exports = function(sequelize, DataTypes) {
           type: DataTypes.INTEGER,     
           allowNull: false,
           validate: {
-            len: [1, 10],
+            len: [5],
             isInt: true
           }
         },
@@ -51,7 +51,7 @@ module.exports = function(sequelize, DataTypes) {
           type: DataTypes.STRING,     
           allowNull: false,
           validate: {
-              len: [1, 100]
+              len: [1, 1000]
           }
         },
       hotAndCold:{
