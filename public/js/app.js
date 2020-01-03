@@ -125,8 +125,6 @@ $(document).ready(function () {
   function filterPrice(minParse, maxParse) {
     $.get("/listings/price?min=" + minParse + "&max=" + maxParse, function (data) {
       console.log("listings", data);
-      // var url = window.location
-      // console.log(url)
       listings = data;
       if (!listings || !listings.length) {
         displayEmpty();
@@ -147,31 +145,21 @@ $(document).ready(function () {
       }
       else{
         listingsToAdd.push(createDetailPage(listings[i]));
-      }
-      
+      } 
     }
     listingsContainer.append(listingsToAdd);
   }
 
-  // This function constructs a post's HTML
   function createNewRow(listings) {
-    // var formattedDate = new Date(listings.createdAt);
-    // formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
     var newlistingsCard = $("<div>");
     newlistingsCard.addClass("card");
     newlistingsCard.addClass("listings-card");
 
     var newlistingsCardHeading = $("<div>");
     newlistingsCardHeading.addClass("card-header");
-    // var deleteBtn = $("<button>");
-    // deleteBtn.text("x");
-    // deleteBtn.addClass("delete btn btn-danger");
-    // var editBtn = $("<button>");
-    // editBtn.text("EDIT");
-    // editBtn.addClass("edit btn btn-info");
     var newlistingsTitle = $("<h5>");
 
-    //image//----------------------------------------------------
+    // image
     var listingImage = $("<img>");
     listingImage.addClass("listing-image");
     listingImage.attr('src', listings.image);
@@ -179,20 +167,15 @@ $(document).ready(function () {
     listingImage.css({
       float: "left"
     });
-    //image//--------------------------------------------------------
 
-    // var newlistingsDate = $("<small>");
     var newlistingsAuthor = $("<h7>");
-    // edit
     newlistingsAuthor.text("Lister: " + listings.sellerName);
-    // edit
     newlistingsAuthor.css({
       float: "right",
       color: "blue"
     });
     var newlistingsCardBody = $("<div>");
     newlistingsCardBody.addClass("card-body");
-
 
     //results list//
     var resultList = $("<ul>");
@@ -201,19 +184,24 @@ $(document).ready(function () {
     var dataEmail = $("<p>");
     var dataSqFt = $("<p>");
     var heatCool = $("<p>");
+    var clickFor = $("<p>");
+
     heatCool.text("Heating & Cooling: " + listings.hotAndCold);
     dataSqFt.text("Area: " + listings.sqFootage + " sq. ft.");
     dataBed.text("Bedrooms: " + listings.bedrooms);
     dataEmail.text("Email: " + listings.email);
+    clickFor.text("Click Picture for Details!");
+    clickFor.addClass("click-link")
+
     listItem.append(dataSqFt);
     listItem.append(dataBed);
     listItem.append(heatCool);
     listItem.append(dataEmail);
+    listItem.append(clickFor);
+
     resultList.addClass("result");
     resultList.append(listItem);
     newlistingsCardBody.append(resultList);
-    //results list//
-
     resultList.css({
       float: "right"
     });
@@ -221,21 +209,12 @@ $(document).ready(function () {
     newlistingsBody.css({
       float: "right"
     });
-    // edit
-    // newlistingsBody.text("Contact email: " + listings.email);
     newlistingsTitle.text("Asking price: $" + listings.sellingPrice);
-    // edit
-    // newlistingsDate.text(formattedDate);
-    // newlistingsTitle.append(newlistingsDate);
-    // newlistingsCardHeading.append(deleteBtn);
-    // newlistingsCardHeading.append(editBtn);
     newlistingsCardBody.append(newlistingsBody);
     newlistingsCardHeading.append(newlistingsTitle);
     newlistingsCardHeading.append(newlistingsAuthor);
     newlistingsCardHeading.append(newlistingsTitle);
-    //image//------------------------------------------------------------
     newlistingsCardBody.append(listingImage);
-    //image//------------------------------------------------------------
     newlistingsCard.append(newlistingsCardHeading);
     newlistingsCard.append(newlistingsCardBody);
     newlistingsCard.data("listings", listings);
@@ -297,14 +276,8 @@ $(document).ready(function () {
     titleText.text("Additional Details")
     detailText = $("<p>");
     detailText.text(listings.listingDetails);
-    // detailText.css({
-    //   float: "right",
-    //   maxWidth: "300px",
-    //   width: "auto",
-    //   padding: "12px"
-    // });
-    addDetail.prepend(titleText);
 
+    addDetail.prepend(titleText);
     addDetail.append(detailText);
 
     heatCoolDetail.text("Heating & Cooling: " + listings.hotAndCold);
@@ -342,9 +315,6 @@ $(document).ready(function () {
     buttonListItem.append(schoolBtn);
     buttonListItem.append(editBtn);
     buttonListItem.append(deleteBtn);
-    
-
-    
     buttonDiv.css({
       float: "right"
     });
@@ -353,22 +323,14 @@ $(document).ready(function () {
     footer.append(buttonDiv);
     modalList.append(detailList);
 
-
     newlistingsCardHeading.append(newlistingsAuthor);
     newlistingsCardHeading.append(newlistingsTitle);
-    // newlistingsCardBody.append(listDiv);
     newlistingsCardBody.append(addDetail);
-
-
 
     newlistingsCard.append(mainImage);
     newlistingsCard.append(newlistingsCardHeading);
     newlistingsCard.append(newlistingsCardBody);
     newlistingsCard.append(footer);
-
-
-
-
     newlistingsCard.data("listings", listings);
     return newlistingsCard;
   }
@@ -418,7 +380,6 @@ $(document).ready(function () {
       }
     });
   })
-
 
   // Buyer Page //
   // Search and Filter Functions//
