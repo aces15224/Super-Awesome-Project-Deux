@@ -7,21 +7,23 @@ html{
   height: 110px;
 }
 
-#logo{
+.logo{
   font-family: 'Pacifico', cursive;
   padding:0px;
   margin:0 auto;
   width:388px;
   height: 100px;
+  z-index: 1;
 }
 
 .navbar-toggler{
   background-color:gray;
+  z-index: 1;
 }
 
- /* #collapseBar{
+ #collapseBar{
   height:150px;
-} */
+}
 
 #h5{
   margin-top:15px;
@@ -30,10 +32,6 @@ html{
   text-decoration: underline;
 }
 
-#navbarToggleExternalContent{
-  height:150px;
-
-} 
 .logged-in, .logged-out, #nav-mobile{
   width: 100px;
   clear:both;
@@ -53,7 +51,6 @@ top:0px;
 
 #header{
   width:100%;
-  /* position:fixed; */
 }
 
 #footer{
@@ -92,7 +89,6 @@ body{
 #labelOne, #labelTwo{
   position: relative;
   top: 58%;
-  /* font-size: 75px; */
   font-size: 475%;
   font-weight: bold;
   margin:0;
@@ -124,7 +120,8 @@ body{
 }
 
 #sellButton{
-  background-color:red;
+  background-color:green;
+  color:white;
 }
 
 #searchButton{
@@ -136,32 +133,19 @@ body{
   border: 1px solid black;
 }
 
-
-/* #searchPanel{
-  position:fixed; 
-  right:0.5px;
-  border: 2px solid black;
-  border-right: 2px solid black;
-
-}  */
-
 #searchForm{
   background-color:gray;
   color: white;
   width:200px;
   height:523px;
-  /* right:-12px; */
   border-left: 2px solid black;
   border-right: 2px solid black;
   border-bottom: 2px solid black;
-  /* float:right;
-  clear:both; */
-
 }
 
 img{
   width:210px;
-  height: 170px;
+  height: 180px;
   padding-left:0;
   padding-right:0px;
   margin:0px;
@@ -174,16 +158,28 @@ img{
   clear:right;
 }
 
+.details-card, .details-card-body{
+  width: 700px;
+  margin:10px;
+  float:left;
+  clear:right;
+}
+.detail-image{
+  height:200;
+  width:auto;
+}
+
+.listings-card, .listing-card-body{
+  width: 500px;
+  margin:10px;
+  float:left;
+  clear:right;
+}
+
 ul, li{
   list-style-type: none;
   padding:0px;
 }
-
-/* .result{
-  padding:0px;
-  margin-right:10px;
-  font-size:12px;
-} */
 
 input[type="radio"]{
   transform: scale(1.5); 
@@ -192,7 +188,6 @@ input[type="radio"]{
 }
 
 #zipRadius, #bedNum, #areaSelect, #minPrice, #maxPrice{
-  /* background-color:black; */
   text-align: center;
   width:170px;
   font-size:12px;
@@ -226,6 +221,19 @@ label{
 #sellerCard, #sellerBody{
   margin:auto;
 }
+
+.specs.btn, .school.btn, .delete.btn, .edit.btn{
+  font-size: 14.5px;
+  
+}
+
+.click-link{
+  font-size:11px;
+  font-weight:bold;
+  color:red;
+}
+
+
 @media screen and (max-width: 1281px) {
   img{
     width:190px;
@@ -323,41 +331,6 @@ label{
 
 }
 
-
-/* 
-@media screen and (max-width: 995px) {
-  #buy, #sell{
-    height:100%;
-    width: 100%;
-  }
-
-  #labelOne, #labelTwo{
-    top: 62%;
-    font-size: 450%; 
-  }
-} */
- /* @media screen and (min-width:677px)  {
-  #buy{
-    height:50%;
-    width: 50%;
-    padding-left:50px;
-    padding-right: 0px;
-  }
-  #sell{
-    height:50%;
-    width: 50%;
-    padding-left:50px;
-    padding-right: 0px;
-  }
-
-
-  #labelOne, #labelTwo{
-    top: 55%;
-    font-size: 450%; 
-  }
-}  */
-
-
 @media screen and (max-width:782px) {
   #buy{
     height:85%;
@@ -372,7 +345,6 @@ label{
     padding-right: 0px;
   }
 
-
   #labelOne, #labelTwo{
     top: 55%;
     font-size: 450%; 
@@ -384,42 +356,3 @@ label{
     top: -80px;
   }
 } 
-
-
-
-/* 
-  
-#buy, #sell{
-  height:100%;
-  width: 100%;
-}
-
-#buy{
-  padding-right: 30px; 
-}
-
-#sell{
-  padding-left: 30px; 
-}
-
-#labelOne, #labelTwo{
-  position: relative;
-  top: 58%;
-  /* font-size: 75px; */
-  /* font-size: 475%;
-  font-weight: bold;
-  margin:0;
-  text-align: center;
-  letter-spacing: 3px;
-  font-family: 'Alfa Slab One', cursive;
-  animation-name: titleSequence;
-  animation-duration: 3s;
-}
-
-#labelOne{
-  color:green;
-}
-
-#labelTwo{
-  color:red;
-}  */

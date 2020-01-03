@@ -54,6 +54,14 @@ module.exports = function(sequelize, DataTypes) {
               len: [1, 1000]
           }
         },
+
+      listingDetails:{
+        type: DataTypes.TEXT,     
+        allowNull: false,
+        validate: {
+          len: [1]
+        }
+      } ,  
       hotAndCold:{
           type:DataTypes.BOOLEAN,
           defaultValue: false
