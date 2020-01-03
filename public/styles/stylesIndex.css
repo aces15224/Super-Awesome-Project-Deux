@@ -164,6 +164,10 @@ img{
   float:left;
   clear:right;
 }
+.detail-image{
+  height:200;
+  width:auto;
+}
 
 .listings-card, .listing-card-body{
   width: 500px;
