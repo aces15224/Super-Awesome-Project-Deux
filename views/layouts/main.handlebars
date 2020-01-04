@@ -15,36 +15,40 @@
     <div class="pos-f-t">
       <div class="collapse" id="navbarToggleExternalContent">
         <div class="bg-dark p-4" id="collapseBar">
-          {{!-- <h5 class="text-white h4">Collapsed content</h5>
-          <span class="text-muted">Toggleable via the navbar brand.</span> --}}
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li class="logged-in">
-              <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
-            </li>
-            <li class="logged-in">
-              <a href="#" class="grey-text" id="logout">Logout</a>
-            </li>
-            <li class="logged-out">
-              <a href="#" class="grey-text modal-trigger" data-target="#modal-login" data-toggle="modal">Login</a>
-            </li>
-            <li class="logged-out">
-              <a href="#" class="grey-text modal-trigger" data-target="#modal-signup" data-toggle="modal">Sign up</a>
-            </li>
-          </ul>
-          <ul class="navbar-brand hide-on-med-and-down" id="nav">
-            <li class="pageLinks">
-              <a href="/">Home</a>
-            </li>
-            <li class="pageLinks">
-              <a href="/buy">Buy</a>
-            </li>
-            <li class="pageLinks">
-              <a href="/sell">Sell</a>
-            </li>
-            <li class="pageLinks">
-              <a href="/about">About</a>
-            </li>
-          </ul>
+          <div class="row">
+            <div class="col-xs-1">
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li class="logged-in">
+                  <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
+                </li>
+                <li class="logged-in">
+                  <a href="#" class="grey-text" id="logout">Logout</a>
+                </li>
+                <li class="logged-out">
+                  <a href="#" class="grey-text modal-trigger" data-target="#modal-login" data-toggle="modal">Login</a>
+                </li>
+                <li class="logged-out">
+                  <a href="#" class="grey-text modal-trigger" data-target="#modal-signup" data-toggle="modal">Sign up</a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-xs-11">
+              <ul class="navbar" id="nav">
+                <li class="pageLinks">
+                  <a class="links" href="/">Home</a>
+                </li>
+                <li class="pageLinks">
+                  <a class="links" href="/buy">Buy</a>
+                </li>
+                <li class="pageLinks">
+                  <a class="links" href="/sell">Sell</a>
+                </li>
+                <li id="about" class="pageLinks">
+                  <a class="links" href="/about">About</a>
+                </li>
+              </ul>
+            </div>
+          </div>         
         </div>
       </div>
       <nav id="headNav" class="navbar navbar-dark">
