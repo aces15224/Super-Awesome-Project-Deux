@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  $(".logged-in").hide();
   // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyCZi3hYSq6X4oe7iyXUwwQFC-TyPnHptJw",
@@ -22,7 +23,7 @@ $(document).ready(function () {
         console.log("Unregistered Service Workers");
       }
     }).then(() => {
-      navigator.serviceWorker.register("./service-worker.js", { scope: "/" }).then((reg) => {
+      navigator.serviceWorker.register("../service-worker.js", { scope: "/" }).then((reg) => {
       }).catch(err => {
         console.error(`Service Worker Error: ${err}`);
       });
@@ -61,7 +62,8 @@ $(document).ready(function () {
     event.preventDefault();
     const email = $("#login-email").val().toString().toLowerCase().trim();
     const password = $("#login-password").val().toString().trim();
-
+    $(".logged-out").hide();
+    $(".logged-in").show();
     firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
       if (document.getElementById("remember-login-check").checked) {
         localStorage.clear();
@@ -80,9 +82,12 @@ $(document).ready(function () {
     event.preventDefault();
     const email = $("#signup-email").val().toString().toLowerCase().trim();
     const password = $("#signup-password").val().toString().trim();
+    $(".logged-out").hide();
+    $(".logged-in").show();
 
     firebase.auth().createUserWithEmailAndPassword(email, password).catch(event => {
       console.log(event.message);
+      
     }).then(() => {
       $.ajax({
         type: "POST",
@@ -102,10 +107,12 @@ $(document).ready(function () {
     });
   });
   //LOG OUT
-  $(document).on("click", "#log-off-button", (event) => {
+  $(document).on("click", "#logout", (event) => {
     event.stopImmediatePropagation();
     event.preventDefault();
+    $(".logged-out").show()
     firebase.auth().signOut().then(() => {
+      
       window.location.href = "/";
     }).catch(err => {
       console.error(err)
