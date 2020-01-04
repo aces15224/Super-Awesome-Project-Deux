@@ -39,14 +39,31 @@ html{
 }
 
 .navbar-brand{
-max-width:700px;
-position: relative;
-left:40%;
-top:0px;
+  max-width:700px;
+  position: relative;
+  left:90%;
+  top:0px;
 }
 
 .pageLinks{
-top:0px;
+  font-size:45px;
+  position:relative;
+  left: 40%;
+  top:0px;
+  padding: 20px;
+}
+
+#nav{
+  margin:auto;
+  width:100%;
+  display:flex;
+  justify-content: center;
+}
+
+.links{
+  color:white;
+  font-weight:bold;
+  margin:auto;
 }
 
 #header{
